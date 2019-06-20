@@ -3,6 +3,7 @@ layout: post
 title:  "Prologue"
 date:   2019-06-21 00:00:00 +0900
 categories: Story
+comments: true
 ---
 시작한다는건 언제나 설레는 일이다. 사람을 만나건, 공부를 시작하건, 연애를 시작하건 모든 일들이 말이다.  
 페이지를 시작하며, 나의 "시작"에 관한 설렘에 대해 나눠보고 싶다.  
