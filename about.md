@@ -1,18 +1,13 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+### Education
+* 2011 ~ 2013 Banwol Middle School  
+* 2014 ~ 2016 Hamhyun High School  
+* 2018 ~ Hanyang University ERICA, Division of Computer Science  
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+### Profile
+* 2018.12 ~ 2019.11 Hycube Vice-president
