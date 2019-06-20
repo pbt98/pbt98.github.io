@@ -4,7 +4,7 @@ title: About Me
 permalink: /about/
 comments: false
 ---
-
+![profile](/asset/profile.JPG){: width="302" height="403"}
 ### Education
 * 2011 ~ 2013 Banwol Middle School  
 * 2014 ~ 2016 Hamhyun High School  
