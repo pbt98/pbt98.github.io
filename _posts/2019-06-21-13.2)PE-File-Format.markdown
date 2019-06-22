@@ -9,11 +9,11 @@ comments: true
 PE 파일은 Windows 운영체제에서 사용되는 실행 파일 형식이다. UNIX의 COFF를 기반으로 제작하였으며, 다른 운영체제로의 이식성을 좋게 하려는 의도였으나, 현재는 Windows 계열의 운영체제에서만 사용중이다.
 # 13.2) PE File-Format
 PE 파일의 종류는  
-종류 | 주요 확장자
+종류 | 주요 확장자  
 ---- | --------  
-실행 계열 | EXE, SCR
-라이브러리 계열 | DLL, OCX, CPL, DRV
-드라이버 계열 | SYS, VXD
+실행 계열 | EXE, SCR  
+라이브러리 계열 | DLL, OCX, CPL, DRV  
+드라이버 계열 | SYS, VXD  
 오브젝트 파일 계열 | OBJ  
 ## 13.2.1) 기본 구조
 DOS header부터 Section header까지를 PE 헤더, 그 밑의 Section들을 합쳐서 PE 바디라고 한다. **파일**에서는 **offset**으로, **메모리** 에서는 **VA(Virtual Address)** 로 위치를 표현한다.  파일이 메모리에 로드 되면 Section의 크기나 위치 등이 바뀌면서 모양이 달라진다. 또한, 파일의 내용은 보통 **코드(.text)**, **데이터(.data)**, **리소스(.rsrc)** 섹션에 나뉘어서 저장된다.  
@@ -21,8 +21,8 @@ DOS header부터 Section header까지를 PE 헤더, 그 밑의 Section들을 합
 * NULL Padding: 섹션의 시작 위치는 각 파일/메모리의 최소 기본단위의 배수에 해당하는 위치여야 하므로, 나머지 영역은 NULL로 채운다.  
 
 ## 13.2.2) VA & RVA
-VA | RVA
----| ----
+VA | RVA  
+---| ----  
 프로세스 가상 메모리의 절대주소 | 어느 기준 위치로부터의 상대주소
 > RVA + ImageBase(어느 기준 위치) = VA  
 
@@ -35,10 +35,10 @@ PE 헤더는 많은 **구조체**로 이루어져 있다.
 ## 13.3.1) DOS Header
 Microsoft는 PE File Format을 만들 때 당시 DOS 파일에 대한 하위 호환성을 고려해서 만들었기에 PE 헤더의 제일 앞부분에는 기존 DOS EXE Header를 확장시킨 *IMAGE_DOS_HEADER* 구조체가 존재한다.  
 이 구조체에서 알아 꼭 알아둬야 할 중요 맴버는 **e_magic**, **e_Ifanew**이다.
-e_magic | e_Ifanew
-------- | ---------
-DOS signiture(4D5A -> ASCII로 "MZ") | NT header의 offset을 표시(파일에 따라 가변적임)
-모든 PE 파일의 시작 부분에 존재 | 값이 가리키는 곳에 IMAGE_NT_HEADERS 구조체가 존재해야함
+e_magic | e_Ifanew  
+------- | ---------  
+DOS signiture(4D5A -> ASCII로 "MZ") | NT header의 offset을 표시(파일에 따라 가변적임)  
+모든 PE 파일의 시작 부분에 존재 | 값이 가리키는 곳에 IMAGE_NT_HEADERS 구조체가 존재해야함  
 
 ![notepad](/asset/notepad.jpg)
 그림에서 볼수 있듯이, 00000000 ~ 00000030이 DOS Header의 범위인데, MZ와 e_Ifanew의 값이 000000E8임을 알 수 있다.(리틀 엔디언에 의해 이렇게 읽힌다.)  
