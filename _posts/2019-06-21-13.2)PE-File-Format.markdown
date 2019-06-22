@@ -24,7 +24,7 @@ DOS header부터 Section header까지를 PE 헤더, 그 밑의 Section들을 합
 
 ## 13.2.2) VA & RVA
 | VA | RVA | 
-|---| ---- | 
+|:---|:---- | 
 | 프로세스 가상 메모리의 절대주소 | 어느 기준 위치로부터의 상대주소 |
 > RVA + ImageBase(어느 기준 위치) = VA  
 
@@ -38,7 +38,7 @@ PE 헤더는 많은 **구조체**로 이루어져 있다.
 Microsoft는 PE File Format을 만들 때 당시 DOS 파일에 대한 하위 호환성을 고려해서 만들었기에 PE 헤더의 제일 앞부분에는 기존 DOS EXE Header를 확장시킨 *IMAGE_DOS_HEADER* 구조체가 존재한다.  
 이 구조체에서 알아 꼭 알아둬야 할 중요 맴버는 **e_magic**, **e_Ifanew**이다.
 | e_magic | e_Ifanew | 
-| ------- | --------- | 
+|:------- |:--------- | 
 DOS signiture(4D5A -> ASCII로 "MZ") | NT header의 offset을 표시(파일에 따라 가변적임)  
 모든 PE 파일의 시작 부분에 존재 | 값이 가리키는 곳에 IMAGE_NT_HEADERS 구조체가 존재해야함  
 
