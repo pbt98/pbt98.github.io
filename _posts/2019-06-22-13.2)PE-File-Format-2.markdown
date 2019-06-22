@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "13. PE File-Format 2th"
+title:  "13. PE File-Format 2nd"
 date:   2019-06-22 22:30:00 +0900
 categories: Reversing
 comments: true
