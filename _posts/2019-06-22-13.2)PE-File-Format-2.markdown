@@ -1,0 +1,65 @@
+---
+layout: post
+title:  "13. PE File-Format 2th"
+date:   2019-06-22 22:30:00 +0900
+categories: Reversing
+comments: true
+---
+## 13.3.3) NT Header
+저번 포스팅에서 e_Ifanew가 가리키는 것이 *IMAGE_NT_HEADERS* 라고 봤었던 것이 기억이 나는데, 이번 장에서 공부했던 내용이 이 구조체에 관한 내용이다. 크기가 F8이나 되는 큰 구조체이다.  
+```C  
+typedef struct _IMAGE_NT_HEADERS {
+    DWORD Signiture;
+    IMAGE_FILE_HEADER FileHeader; // PE Signature: 50450000
+    IMAGE_OPTIONAL_HEADER32 OptionalHeader;
+} IMAGE_NT_HEADERS32, "PIMAGE_NT_HEADERS32"
+```  
+코드를 보았을때, FileHeader와 OptionalHeader가 구조체 맴버로 있다.
+## 13.3.4) File Header
+
+| 자료형 | 이름 |  
+|:-------|:---------|  
+|WORD | Machine |  
+|WORD | NumberOfSections|  
+|DWORD| TimeDateStamp |  
+|DWORD | **PointerToSymbolTable** |  
+|DWORD | **NumberOfSymbols** |  
+|WORD | **SizeOfOptionalHeader** |  
+|WORD | **Characteristics** |  
+
+파일의 개략적인 속성을 나타내는 *IMAGE_FILE_HEADER* 구조체를 표로 나타냈다. 중요 표시한 맴버들은 정확한 값이 셋팅되어 있지 않다면 파일이 정상적으로 작동하지 **않는다.**  
+1. Machine  
+&nbsp;&nbsp;Machine Number는 **CPU별로 고유의 값**이다. Intel x86 호환 칩은 14c의 값을 가진다. 그 외의 값들은 winnt.h에 정의되어 있다.
+2. NumberOfSections:  
+&nbsp;&nbsp;저번 포스팅에서 PE 파일은 데이터, 코드, 리소스 등이 각각의 **섹션**에 나뉘어서 저장된다 했었는데, 이 값이 **섹션의 개수**를 나타낸다. **반드시** 0보다 커야하며, 정의된 섹션의 개수와 실제 섹션의 개수가 다르면 런타임 에러가 발생한다.
+3. SizeOfOptionalHeader:  
+&nbsp;&nbsp;***IMAGE_OPTIONAL_HEADER32*의 크기**를 나타낸다. Windows의 PE 로더는 이 값을 보고 *IMAGE_OPTIONAL_HEADER32*의 크기를 인식한다[^1].  
+>의문점: PE로더는 sizeof와 관련된 것을 쓸 수 없게 만들어져 있는건가? 아니면 이렇게 설계하는 것이 효율적이어서 그런것인가?  
+
+4. Characteristics:  
+&nbsp;&nbsp;**파일의 속성**을 나타내는 값이다. 실행 가능한지 혹은 DLL 파일인지 구별하는 등의 용도로 쓰인다.(bit OR형식으로 조합된다.)  
+주목해야할 값은 다음과 같다.  
+
+| 이름 | 값 |  
+|:-------|:---------|  
+|IMAGE_FILE_EXECUTABLE_IMAGE | 0x0002 |  
+| IMAGE_FILE_DLL | 0x2000 |    
+
+5. TimeDateStamp:  
+해당 파일의 **빌드 시간**을 나타낸 값이다. 실행엔 영향을 미치지 않는다.  
+
+![my_machine](/asset/IMAGE_FILE_HEADER.JPG)  
+위의 사진은 내 Machine의 *IMAGE_FILE_HEADER*에 대한 정보이다. 
+
+| 맴버명 | 값 |  
+|:-------|:---------|  
+| Machine | 0x8664(AMD64) |  
+| NumberOfSections | 0x0006|  
+|TimeDateStamp| 0x840F275E |  
+|**PointerToSymbolTable** | 0x00000000 |  
+|**NumberOfSymbols** | 0x00000000 |  
+|**SizeOfOptionalHeader** | 0x00F0 |  
+|**Characteristics** | 0x0022(bit OR연산에 대해 좀 더 알아보고 해석해봐야겠다.) |  
+
+[^1]: PE32+ 파일의 경우엔 *IMAGE_OPTIONAL_HEADER64*를 사용하는데 두 구조체의 크기가 다르기 때문에 맴버에 구조체 크기를 명시해둔다.
+
