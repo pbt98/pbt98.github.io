@@ -1,0 +1,179 @@
+---
+layout: post
+title:  "13. PE File-Format 3rd"
+date:   2019-06-23 16:50:00 +0900
+categories: Reversing
+comments: true
+---
+## 13.3.5) NT-Header - Optional Header
+다음은 *IMAGE_OPTIONAL_HEADER32*의 주목해야할 맴버들이다.
+
+| 자료형 | 이름 |  
+|:-------|:---------|  
+|WORD | Magic |  
+|DWORD | AddressOfEntryPoint|  
+|DWORD| ImageBase |  
+|DWORD | SectionAlignment |  
+|DWORD | FileAlignment |  
+|DWORD | SizeOfImage |  
+|DWORD | SizeOfHeader |
+|WORD | Subsystem |  
+|DWORD | NumberOfRvaAndSizes |  
+|IMAGE_DATA_DIRECTORY[] | DataDirectory |  
+
+1. Magic:  
+&nbsp;&nbsp;IMAGE_OPTIONAL_HEADER32의 경우에는 10, IMAGE_OPTIONAL_HEADER64의 경우에는 20의 값을 가진다.
+
+2. AddressOfEntryPoint:  
+&nbsp;&nbsp;EP(Entry Point)의 RVA 값을 가지고 있다. **프로그램에서 최초로 실행되는 코드의 시작 주소**로 매우 중요한 값이다.  
+3. ImageBase:  
+&nbsp;&nbsp;프로세스의 가상 메모리 32비트의 경우는 0 ~ FFFFFFFF 범위다.(64비트의 경우에는 검색 후 추가할 것.) 이렇게 광활한 메모리에서, 이 값은 **PE 파일이 로딩되는 시작 주소**를 나타낸다.  
+
+| 파일 형식 | 영역 | 로딩 범위 |  
+|:-------|:---------|:---------|  
+|EXE, DLL | user memory | 0 ~ 7FFFFFFF|  
+|SYS | Kernal memory| 80000000 ~ FFFFFFFF |   
+
+3. 일반적으로 개발 도구들이 만들어내는 exe 파일의 ImageBase 값은 00400000이고 DLL 파일의 ImageBase값은 10000000 이다.(다른 값이 저장될수도 있다.)  
+PE 로더는 PE 파일을 실행시키기 위해 프로세스를 생성하고 파일을 메모리에 로딩한 후, EIP 레지스터[^1.] 값을 ImageBase + AddressOfEntryPoint 값으로 셋팅한다.  
+
+4. SectionAlignment, FileAlignment:  
+&nbsp;&nbsp;PE 파일의 바디부분은 섹션으로 나뉘어져 있다. **파일에서 섹션의 최소단위**를 나타낸 것이 FileAlignment, **메모리에서 세션의 최소단위**를 나타낸 것이 SectionAlignment이다.(둘은 같을수도 있고, 다를수도 있다.)  
+파일/메모리의 섹션 크기는 반드시 각각 FileAlignment/SectionAlignment의 **배수**가 되어야 한다.  
+
+5. SizeOfImage:  
+&nbsp;&nbsp;PE 파일이 메모리에 로딩되었을 때, **가상 메모리에서 PE Image가 차지하는 크기**를 나타낸다.  
+일반적으로 파일의 크기와 메모리에 로딩된 크기는 다르다.
+
+6. SizeOfHeader:  
+&nbsp;&nbsp;**PE 헤더의 전체 크기**를 나타낸다. 이 값 역시 FileAlignment의 배수여야 한다.  
+파일 시작에서 SizeOfHedader 오프셋만큼 떨어진 위치에 첫 번째 섹션이 위치한다.
+>의문점: 이 값은 SectionAlignment의 배수일려나?  
+
+7. Subsystem:  
+이 값을 보고 시스템 드라이버 파일인지, 일반 실행 파일인지 구분할 수 있다.
+
+| 값 | 의미 | 비고 |  
+|:-------|:---------|:---------|  
+|1 | Driver file | 시스템 드라이버(ntfs.sys)|  
+|2 | GUI file | 창 기반 에플리케이션(notepad.exe) |
+|3 | CUI file | 콘솔 기반 에플리케이션(cmd.exe) |
+
+8. NumberOfRvaAndSizes:  
+&nbsp;&nbsp;*IMAGE_DATA_DIRECTORY*구조체의 배열로 표에서 말하는 Directory는 그냥 **어떤 구조체의 배열**이라고 생각하면 편하다. 주요 항목은 밑의 표와 같다.  
+특히 IMPORT, EXPORT Directory 구조는 PE 헤더에서 **매우** 중요하다.
+
+| Index | 값 |  
+|:-------|:---------|  
+|DataDirectory[0] | **EXPORT directory** |  
+|DataDirectory[1] | **IMPORT directory** |  
+|DataDirectory[2] | RESOURCE directory |  
+|DataDirectory[9] | TLS directory |  
+
+*IMAGE_OPTIONAL_HEADER32*구조체 전체를 내 Machine에서 확인해보면,
+
+![IOH](/asset/IMAGE_OPTIONAL_HEADER.JPG)
+
+| 이름 | 값 |  
+|:-------|:---------|  
+|**Magic** | 0x020B(IMAGE_NT_OPTIONAL_HDR64_MAGIC) |  
+|MajorLinkerVersion | 0x0E |  
+|MinorLinkerVersion | 0x0C |  
+|SizeOfCode |0x00018E00 |  
+|SizeOfInitializedData | 0x00025000 |  
+|SizeOfUninitialiezedData | 0x0000000 |  
+|**AddressOfEntryPoint** | 0x00019180 |  
+|BaseOfCode | 0x00001000 |  
+|**ImageBase** | 0x0000000140000000|
+|**SectionAlignment** | 0x00001000|  
+|**FileAlignment** | 0x00000200 |  
+|MajorOperatingSystemVersion | 0x000A |  
+|MinorOperatingSystemVersion | 0x0000 |
+|MajorImageVersion | 0x000A |  
+|MinorImageVersion | 0x0000 |  
+|MajorSubsystemVersion | 0x000A |  
+|MinorSubsystemVersion | 0x0000 |  
+| Win32VersionValue | 0x00000000 |  
+|SizeOfImage | 0x00041000 |
+|SizeOfHeaders | 0x00000400 |  
+|CheckSum | 0x0004ACDF |  
+|**Subsystem** | 0x0002 |  
+|DllCharacteristics | 0xC160 |  
+|SizeOfStackReserve | 0x0000000000080000 |  
+|SizeOfStackCommit | 0x0000000000011000 |  
+|SizeOfHeapReserve | 0x0000000000100000 |  
+|SizeOfHeapCommit | 0x0000000000001000 |  
+|LoaderFlags | 0x00000000 |  
+|NumberOfRvaAndSizes| 0x00000010 | 
+|**RVA of EXPORT Directory** | 0x00000000 |  
+|**Size of EXPORT Directory** | 0x00000000 |  
+|**RVA of IMPORT Directory** | 0x0001F448 |  
+|**Size of IMPORT Directory** | 0x00000244 |  
+|**RVA of RESOURCE Directory** | 0x00026000 |  
+|**Size of RESOURCE Directory** | 0x00019CE0 |  
+|RVA of EXCEPTION Directory | 0x00025000 |  
+|Size of EXCEPTION Directory | 0x000008B8 |  
+|RVA of SECURITY Directory | 0x00000000 |  
+|Size of SECURITY Directory | 0x00000000 |  
+|RVA of BASERELOC Directory | 0x00040000 |  
+|Size of BASERELOC Directory | 0x00000218 |  
+|RVA of DEBUG Directory | 0x0001E310 |  
+|Size of DEBUG Directory | 0x00000054 |  
+|RVA of COPYRIGHT Directory | 0x00000000 |  
+|Size of COPYRIGHT Directory | 0x00000000 |  
+|RVA of GLOBALPTR Directory | 0x00000000 |  
+|Size of GLOBALPTR Directory | 0x00000000 |  
+|**RVA of TLS Directory** | 0x00000000 |  
+|**Size of TLS Directory** | 0x00000000 |  
+|RVA of LOAD_CONFIG Directory | 0x00000000 |  
+|Size of LOAD_CONFIG Directory | 0x00000000 |  
+|RVA of BOUND_IMPORT Directory | 0x0001A550 |  
+|Size of BOUND_IMPORT Directory | 0x00000100 |  
+|RVA of IAT Directory | 0x00000000 |  
+|Size of IAT Directory | 0x00000000 |  
+|RVA of DELAY_IMPORT Directory | 0x0001A650 |  
+|Size of DELAY_IMPORT Directory | 0x00000970 |  
+|RVA of COM_DESCRIPTOR Directory | 0x00000000 |  
+|Size of COM_DESCRIPTOR Directory | 0x00000000 |  
+|RVA of Reserved Directory | 0x00000000 |  
+|Size of Reserved Directory | 0x00000000 |  
+
+
+## 13.3.6) 섹션 헤더
+**각 섹션의 속성**을 정의한 것을 섹션 헤더라고 부르는데, PE 파일을 섹션으로 나누어서 비슷한 것 끼리 저장하기 때문에 각각의 섹션의 속성을 기술할 섹션 헤더가 필요하다. 섹션의 속성에는 **file/memory에서의 시작 위치, 크기, 엑세스 권한** 등이 필요하다. 즉, code/data/resource 마다 각각의 특성, 접근 권한 등을 다르게 설정할 필요가 있는 것이다.  
+
+|종류 |엑세스 권한 |  
+|:-------|:---------|  
+|code |실행, 읽기 권한 |  
+|data |비실행, 읽기, 쓰기 권한 |  
+|resource |비실행, 읽기 권한 |  
+
+* IMAGE_SECTION_HEADER  
+섹션 헤더는 각 섹션별 *IMAGE_SECTION_HEADER* 구조체의 배열로 이루어져 있다.  
+이 구조체에서 알아야 할 중요 맴버는 밑의 표와 같다.  
+VirtualAddress와 PointerToRawData는 SectionAlignment와 FileAlignment에 맞게 결정된다.  
+Virtualsize와 SizeOfRawData는 일반적으로 서로 다른 값을 가진다. -> 이 말은 파일에서의 섹션 크기와 메모리에 로딩된 섹션의 크기는 다르다는 이야기다.  
+Characteristics는 밑의 코드에서 표시된 값들의 bit OR연산으로 이루어진다.  
+
+|항목 |의미 |  
+|:-------|:---------|  
+|VirtualSize |메모리에서 섹션이 차지하는 크기 |  
+|VirtualAddress |메모리에서 섹션의 시작 주소(RVA 형식) |  
+|SizeOfRawData |파일에서 섹션이 차지하는 크기 |  
+|PointerToRawData | 파일에서 섹셔의 시작 위치 |  
+|Characteristics | 섹션의 속성(bit OR) |  
+
+```C
+#define IMAGE_SCN_CNT_CODE 0x00000020 //Section contains code.
+#define IMAGE_SCN_CNT_INITIALIZED_DATA 0x00000040 // Section contains initialized data.
+#define IMAGE_SCN_CNT_UNINITIALIZED_DATA 0x00000080 // Section contains uninititalized data.
+#define IMAGE_SCN_MEM_EXECUTE 0x20000000 // Section is executable.
+#define IMAGE_SCN_MEM_READ 0x40000000 // Section is readable.
+#define IMAGE_SCN_MEM_WRITE 0x80000000 // Section is writable.
+```
+
+내 Machine의 섹션 헤더는 이러하다.
+
+![SD](/asset/IMAGE_SECTION_HEADER.JPG)
+
+[^1.]:EIP 레지스터는 **CPU가 처리할 명령어의 주소**를 나타내는 레지스터이며, CPU는 EIP에 저장된 명령어 하나를 처리한 후, 자동으로 그 명령어의 길이만큼 EIP를 증가 시킨다. -> 이것이 반복되면서 CPU가 명령어를 처리하는 것이다.
