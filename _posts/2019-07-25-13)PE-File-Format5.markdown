@@ -50,7 +50,8 @@ typedef struct _IMAGE_IMPORT_BY_NAME {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3. INT에서 각 원소의 값은 IMAGE_IMPORT_BY_NAME 구조체 포인터다.(IAT도 같은 값을 가지는 경우가 있다.)  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4. INT와 IAT의 크기는 같아야 한다.  
 
---------------------------
+--------------------------  
+
 ```
 PE 로더가 Import 함수 주소를 IAT 입력하는 순서  
 1. IID의 Name 맴버를 읽은 뒤 라이브러리의 이름 문자열("kernel32.dll")을 얻는다.  
@@ -81,15 +82,15 @@ PE 로더가 Import 함수 주소를 IAT 입력하는 순서
 
 1. 라이브러리 이름(Name)  
 &nbsp;&nbsp;Name 항목은 Import 함수가 소속된 라이브러리 파일의 이름 문자열 포인터다. 
-![Name](/asset/Name.jpg)  
+![Name](/asset/Name.JPG)  
 여기서 "comdlg32.dll"를 발견할 수 있다.
 2. OriginalFirstThunk - INT(Import Name Table)  
 &nbsp;&nbsp;INT는 Import 하는 함수의 정보(Ordinal, Name)가 담긴 구조체 포인터 배열이다. 이 정보를 얻어야 **프로세스 메모리에 로딩된 라이브러리에서 해당 함수의 시작 주소**를 정확히 구할 수 있다.  
-![INT](/asset/INT.jpg)  
+![INT](/asset/INT.JPG)  
 INT는 **주소 배열**의 형태로 되어있다.(배열의 끝은 NULL로 되어 있다. 이 주소들은 모두 RVA 값으로 따라가면 Import 하는 **API 함수 이름 문자열**이 나타난다.  
 3. IMAGE_IMPORT_BY_NAME  
 &nbsp;&nbsp;RVA 7A7A는 RAW 6E7A 이므로 따라가보면,  
-![pgset](/asset/PageSet.jpg)
+![pgset](/asset/PageSet.JPG)
 
 | Hint(ordinal) | Name |  
 |:-------- | :----|   
