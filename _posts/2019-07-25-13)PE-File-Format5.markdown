@@ -17,7 +17,8 @@ comments: true
 &nbsp;&nbsp;1. Explicit Linking: 프로그램에서 사용되는 순간에 로딩하고 사용이 끝나면 메모리에서 해제되는 방법  
 &nbsp;&nbsp;2. Implicit Linking: 프로그램을 시작할 때 같이 로딩되어 프로그램 종료할 때 메모리에서 해제되는 방법(IAT가 이 방법을 따른다.)  
 ## 13.5.2) IMAGE_IMPORT_DESCRIPTOR
-* PE파일은 자신이 어떤 라이브러리를 Import하고 있는지 이 구조체에 명시하고 있다.
+* PE파일은 자신이 어떤 라이브러리를 Import하고 있는지 이 구조체에 명시하고 있다.  
+
 ```C
 typedef struct _IMAGE_IMPORT_DESCRIPTOR {
     union {
@@ -35,6 +36,7 @@ typedef struct _IMAGE_IMPORT_BY_NAME {
     BYTE Name[1];
 } IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;
 ```  
+
 * 일반적인 프로그램에선 보통 여러 개의 라이브러리를 Import하기 때문에 **라이브러리의 개수**만큼 위 구조체의 배열 형식으로 존재하며, 구조체 배열의 마지막은 NULL 구조체로 끝나게 된다. 구조체의 중요 맴버는 모두 *RVA*값을 가진다.  
 
 | 항목 | 의미 |  
