@@ -106,7 +106,7 @@ INT는 **주소 배열**의 형태로 되어있다.(배열의 끝은 NULL로 되
 
 4. FirstThunk - IAT(Import Address Table)  
 &nbsp;&nbsp;IAT의 RVA는 12C4 이므로 RAW는 6C4이다.
-![iat](/asset/IAT.jpg)  
+![iat](/asset/IAT.JPG)  
 
 IAT의 첫 번째 원소 값은 이미 763248D6로 하드코딩되어 있다. 그러나 쓸모 없는 값으로 이 프로그램이 실제 로딩되었을땐 이 값은 정확한 주소 값으로 대체된다.(아마 내 가상 시스템이 Windows XP SP2여서 그런 것 같다.)  
 
