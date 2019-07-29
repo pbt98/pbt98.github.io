@@ -1,0 +1,41 @@
+---
+layout: post
+title:  "15. Debugging notepad packed by UPX 1st"
+date:   2019-07-29 12:40:00 +0900
+categories: Reversing
+comments: true
+---
+# 15.1) notepad.exe의 EP Code  
+![getm](/asset/getm.JPG)  
+* 010073B2 주소에서 GetModuleHandleA() API를 호출한 다음 notepad.exe 프로세스의 **ImageBase**를 구한다.  
+* 010073B4에서 MZ 시그니쳐를 비교한다.(5A4D)  
+* 010073C0에서 PE 시그니쳐를 비교한다.(4550)  
+
+# 15.2) notepad_upx.exe의 EP Code  
+![upx](/asset/upxep.JPG)  
+* EP 주소는 10154F0이며, 이곳은 **두 번째 섹션**의 끝부분이다.  
+* 실제 압축된 notepad 원본 코드는 EP 주소의 위쪽으로 존재한다.  
+* 10154F0부터 살펴보면,  
+1. PUSHAD 명령으로 EAX ~ EDI 레지스터 값을 스택에 저장한다.  
+2. ESI와 EDI 레지스터를 각각 두 번째 섹션 시작 주소(01011000)와 첫 번째 섹션 시작 주소(01001000)로 세팅한다.  
+3. **디버깅시 ESI, EDI가 동시에 세팅되면 ESI가 가리키는 버퍼에서 EDI가 가리키는 버퍼로 메모리 복사**가 일어날 것으로 예측할 수 있다. -> ESI로 부터 데이터를 읽어서 압축 해제 후, EDI에 저장시킬 것이다.  
+
+# 15.3) UPX 파일 트레이싱  
+* 루프를 만나면 역할을 살펴본 후 탈출한다.  
+* 압축해제 과정은 많은 루프의 연속이다.  
+
+## 15.3.1) OllyDbg의 트레이스 명령어  
+
+|명령어 | 단축키 | 설명 |  
+|:---------|:-------|:-----|  
+|Animate Into | Ctrl + F7 | Step Into 명령 반복(화면에 표시 됨)|  
+|Animate Over | Ctrl + F8 | Step Over 명령 반복(화면에 표시 됨)|  
+|Trace Into | Ctrl + F11 | Step Into 명령 반복(화면에 표시 안 됨)|  
+|Trace Over | Ctrl + F12 | Step Over 명령 반복(화면에 표시 안 됨)|  
+
+* 에니메이트 명령어는 트레이싱 과정이 화면에 표시된다.  
+* 트레이스 명령어는 화면에 표시되지 않는다.  
+* 트레이스 명령어는 미리 설정한 트레이스 조건에서 자동으로 멈출 수 있고, 로그를 남길 수도 있다.  
+
+## 15.3.2) 루프 #1  
+* 책에서 나오는 루프를 찾지 못하겠다... 내일 좀 더 집중해서 찾아봐야겠다.  
