@@ -1,0 +1,27 @@
+---
+layout: post
+title:  "15. Debugging notepad packed by UPX 2nd"
+date:   2019-07-30 19:40:00 +0900
+categories: Reversing
+comments: true
+---
+## 15.3.2) 루프 #1  
+* 책에 나오는 루프를 찾으려 했으나, 찾지 못했다... UPX 3.03w 버전과 UPX 3.95 버전 사이에 Unpack 과정이 달라졌을 가능성이 있으므로 버전 기록을 살펴봐야겠다.  
+
+# 15.4) UPX의 OEP를 빨리 찾는 방법  
+
+## 15.4.1) POPAD 명령어 이후의 JMP 명령어에 BP 설치  
+* UPX 패커의 특징 중 하나는 EP 코드가 PUSHAD/POPAD 명령어로 둘러싸여 있다는 것이다.  
+* **OEP 코드로 가는 JMP 명령어가 POPAD 명령어 바로 이후에 나타난다.**  -> 이 JMP 명령어에 BP를 설치하고 실행하면 바로 OEP로 갈 수 있다.  
+
+## 15.4.2) 스택에 하드웨어 브레이크 포인트(Hardware Break Point) 설치  
+* 맨 처음의 PUSHAD 명령어를 수행한 후의 스택 상태를 보면 EAX ~ EDI의 값이 모두 쌓여있다.  
+* 여기서 OllyDbg의 Dump 창에서 저 스택 주소(0006FFA4)로 간 뒤, 오른쪽 마우스를 클릭하고 BreakPoint -> Hardware, on access -> Byte를 선택해서 BP를 설치한다.  
+* 이렇게 되면 POPAD가 호출되는 순간에 하드웨어 BP가 설치된 0006FFA4 주소를 엑세스하고, 그때 제어가 멈춘다. 그리고 바로 밑에 JMP 명령어가 존재하는 것을 볼 수 있고, 따라 들어가면 저번 포스팅에서 봤던 notepad.exe의 EP코드가 나온다!
+
+![up_s](/asset/upx_stack.JPG)  
+![jmp](/asset/jmp.JPG)  
+![oep](/asset/upx_oep.JPG)  
+
+# 마무리  
+* UPX 3.03 버전과 루프가 돌아가는 매커니즘이 달라졌다면 그것에 대해서도 익혀야겠다 생각했고, 11년이 지났지만 PUSHAD/POPAD로 EP코드가 쌓여 있다는 것이 변하지 않았다는 점이 신기했다.
