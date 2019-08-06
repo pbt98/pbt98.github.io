@@ -15,6 +15,7 @@ comments: true
 # 16.3.2) IMAGE_BASE_RELOCATION 구조체  
 * 위의 그림에선 Base Relocation Table에 하드코딩 주소들의 옵셋(위치)들이 나열되어 있다. -> 이 테이블만 읽어 내면 하드코딩 주소 옵셋을 정확히 알아낼 수 있다.  
 * Base Relocation Table은 *IMAGE_BASE_RELOCATION* 구조체 배열이다.  
+
 ```C
 typedef struct _IMAGE_BASE_RELOCATION {
     DWORD VirtualAddress;
@@ -62,9 +63,11 @@ typedef IMAGE_BASE_RELOCATION UNALIGNED * PIMAGE_BASE_RELOCATION;
 
 * 최상위 4비트는 Type으로 사용된다. PE 파일에서 일반적인 값은 3(IMAGE_REL_BASED_HIGHLOW)이고, 64비트용 PE+ 파일에서는 A(IMAGE_REL_BASED_DIR64)이다.  
 * TypeOffset의 하위 12비트가 진짜 Offset을 의미한다. 이 값은 VirtualAddress 기준의 옵셋이다. 따라서 프로그램에서 하드코딩 주소가 있는 옵셋은 다음과 같이 계산된다.  
+
 ```
 VirtualAddress(1000) + Offset(420) = 1420(RVA)  
 ```  
+
 ![ext](/asset/ext.JPG)  
 * 위 그림에서 볼수 있듯이, 현재 내 머신에선 notepad.exe가 000F0000에 로드 되었는데, RVA 1420에 적힌 하드코딩 된 주소 값을 찾아보면,  
 ![r](/asset/rva_1.JPG)  
