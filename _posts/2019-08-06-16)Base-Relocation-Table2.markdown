@@ -42,6 +42,7 @@ typedef IMAGE_BASE_RELOCATION UNALIGNED * PIMAGE_BASE_RELOCATION;
 |TypeOffset| 이 구조체 밑으로 WORD 타입의 배열이 따라온다는 뜻 -> 이 배열이 프로그램에 하드코딩된 주소들의 옵셋|  
 
 # 16.3.3) Base Relocation Table의 해석 방법  
+
 | RVA| Data| Comment|  
 |:-----|:---------|:---------|  
 |0002F000| 00001000| VirtualAddress|  
