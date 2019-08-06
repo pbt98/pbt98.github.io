@@ -25,7 +25,3 @@ comments: true
 
 * 여기서 핵심은 **하드코딩**된 주소 위치를 찾는 것이다.  
 * 이를 위해서 PE 파일 내부에 Relocation Table이라고 하는 하드코딩 주소들의 옵셋(위치)을 모아 놓은 목록이 존재한다.(Relocation Table은 PE 파일 빌드(컴파일/링크) 과정에서 제공된다.) Relocation Table로 찾아가는 방법은 PE 헤더의 Base Relocation Table 항목을 따라가는 것이다.  
-
-# 16.3.1) Base Relocation Table  
-* Base Relocation Table 주소는 PE 헤더에서 DataDirectory 배열의 여섯 번째 항목에 들어있다.(배열의 Index = 5)  
-* *IMAGE_NT_HEADERS\IMAGE_OPTIONAL_HEADER\IMAGE_DATA_DIRECTORY[5]  
