@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "17. Delating .reloc Section in PE Pile 1st"
+date:   2019-08-06 16:50:00 +0900
+categories: Reversing
+comments: true
+---
+## 17.1) .reloc 섹션  
+* EXE 형식의 PE 파일에서 Base Relocation Table 항목은 실행에 큰 영향을 끼치지 않는다. -> 삭제해도 된다는 이야기!  
+* 그러나 DLL, SYS 형식의 파일은 이 항목이 필수라 지우면 안된다.  
+* VC++에서 생성된 PE 파일의 Relocation 섹션 이름은 '.reloc'이다. 이 섹션은 보통 마지막에 위치해서 삭제하기 편하다.  
+
+## 17.2) reloc.exe  
+
+```  
+해야할 작업
+1. .reloc 섹션 헤더 정리  
+2. .reloc 섹션 제거  
+3. IMAGE_FILE_HEADER 수정  
+4. IMAGE_OPTIONAL_HEADER 수정  
+```  
+
+# 17.2.1) .reloc 섹션 헤더 정리  
+![relo](/asset/reloc.JPG)  
+* .reloc 섹션 헤더는 파일 옵셋 270에서 시작된다.(섹션 헤더의 크기는 28 - 270 ~ 297) -> 이 부분을 Hex Editor를 이용해서 0으로 덮어 쓰면 밑의 그림처럼 된다.  
+![modi](/asset/modi.JPG)  
+
+# 17.2.2) .reloc 섹션 제거  
+* 맨 위의 그림에서 .reloc 섹션의 시작 옵셋은 C000이다.(여기부터 파일 끝까지 .reloc 섹션 영역이다.) -> 파일 끝까지 삭제한다.  
+* 복습) **PointertoRawData**는 섹션의 시작 위치를 나타낸다.
+
+![del](/asset/del_rel.JPG)  
+
+* 다른 PE 헤더 정보들이 아직 수정되지 않아서 파일이 정상적으로 작동하지 않는다.  
+![wrong](/asset/wrong_del.JPG)
+
+# 17.2.3) IMAGE_FILE_HEADER 수정  
+![image_f_h](/asset/image_f_h.JPG)  
+
+* 섹션이 하나 줄었으므로 Number of Sections 항목을 5 -> 4로 바꿔준다.
+![de](/asset/de.JPG)  
+
+# 17.2.3) IMAGE_OPTIONAL_HEADER 수정  
+* .reloc 섹션이 제거되면서 프로세서 가상 메모리에서 섹션 크기만큼 전체 이미지 크기가 줄었다. **이미지 크기는 IMAGE_OPTIONAL_HEADER - Size of Image** 값에 명시되어 있으므로 이를 수정해준다.  
+![sizeofim](/asset/sizeofim.JPG)  
+
+* 위의 그림에서 Size of Image의 값은 11000이다. .reloc 섹션의 VirtualSize 값은 E40이고, 이를 Section Alignment에 맞게 확장하면 1000이 된다.  
+
+```  
+(VirtualSize + SectionAlignment - 1) & ~(SectionAlignment-1)  
+위의 확장은 이 식을 썼다.
+```  
+* 따라서, Size of Image에서 1000만큼 빼줘야 한다.
+![sizeofm](/asset/sizeofm.JPG)  
+
+## 17.3) 마무리 
+* 잘 실행됨을 확인할 수 있었다. 좀 더 많은 실력향상을 위해선 이번엔 섹션을 추가해봐야겠다.
