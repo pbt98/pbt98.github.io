@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "20. Practice inline patch 1st"
+title:  "20. Practice inline patch"
 date:   2019-08-09 16:13:00 +0900
 categories: Reversing
 comments: true
