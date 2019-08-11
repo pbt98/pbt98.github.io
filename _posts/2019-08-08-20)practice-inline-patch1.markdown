@@ -102,3 +102,20 @@ INT_PTR WINAPI DialogBoxParam(
 
 # 20.5.3) 패치 코드 실행하기  
 * 401083 주소의 JMP OEP 명령어를 코드 케이브로 변경하면 된다.  
+* 이때 유의할것은 이 영역(401083)은 원래 암호화되어 있는 영역이라는 것이다. 이 영역은 XOR 7으로 암호화 된 영역이므로 JMP 코드 케이브를 쓸때(JMP unpackme.00401280)을 E9 F8 01 이라 그대로 쓰면 안된다.  
+
+```  
+E9 XOR 7 = EE  
+F8 XOR 7 = FF  
+01 XOR 7 = 06  
+```  
+
+* 따라서 패치를 진행하면 밑의 그림처럼 된다.  
+![patched](/asset/patched.JPG)  
+![patched1](/asset/patched1.JPG)  
+![patched2](/asset/patched2.JPG)  
+
+## 마무리  
+* 어셈블리어 코드를 내 손으로 작성한 것은 아니므로 코드에 대한 공부는 좀 더 필요하다.  
+* 인라인 패치의 개념은 향후 API 후킹에도 활용되므로 잘 알아두자.  
+
