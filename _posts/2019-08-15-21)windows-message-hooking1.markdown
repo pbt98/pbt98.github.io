@@ -37,7 +37,7 @@ HHOOK SetWindowsHookEx (
 ```  
 
 * hook procedure는 운영체제가 호출해주는 콜백 함수다.  
-* 메시지 훅을 걸 때 hook procedure는 DLL 내부에 존재해야 하며, 그 DLL의 인스턴스 핸들[^1.]이 바로 hMod이다.  
+* 메시지 훅을 걸 때 hook procedure는 DLL 내부에 존재해야 하며, 그 DLL의 인스턴스 핸들[^1.] 이 바로 hMod이다.  
 * SetWindowsHookEx()를 이용해서 훅을 설치해 놓으면, 어떤 프로세스에서 해당 메시지가 발생했을 때 운영체제가 해당 DLL 파일을 해당 프로세스에 강제로 인젝션하고 등록된 hook procedure를 호출한다.  
 
 ## 21.4) 키보드 메시지 후킹 실습  
@@ -74,4 +74,5 @@ LRESULT CALLBACK KeyboardProc(
 * 키보드 훅이 설치된 상황에서 어떤 프로세스에서 키 입력 이벤트가 발생하면 OS는 해당 프로세스에게 **강제로** KeyHook.dll을 인젝션한다. 이제 KeyHook.dll을 로딩한 프로세스에서 키보드 이벤트가 발생하면 KeyHook.KeyboardProc()이 먼저 호출된다.  
 * KeyboardProc() 함수의 내용에는 키보드 입력이 발생했을 때 현재 프로세스 이름과 "notepad.exe" 문자열과 비교하여 만약 같다면 1을 리턴해서 KeyboardProc() 함수를 종료시킨다. -> 이것이 메시지를 가로채서 없애버리는 것이다. -> 결국 키보드 메시지는 notepad.exe의 [application message queue]에 전달되지 않는다.  
 * 그 외의 경우에는 return CallNextHookEx(g_hHook, nCode, wParam, lParam); 명령을 실행하면 **메시지는 다른 응용 프로그램 혹은 훅 체인의 또 다른 훅 함수로 전달**된다.  
+
 [^1.]: 인스턴스는 어떤 대상이나 단위의 구체적인 실체를 말하고, 핸들은 운영체제에 의해 생성된 리소스나 오브젝트를 제어하기 위한 32비트 정수값이다.  
