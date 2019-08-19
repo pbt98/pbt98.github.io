@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "22. A keylogger used for malicious purposes"
-date:   2019-08-15 21:42:00 +0900
+date:   2019-08-19 13:42:00 +0900
 categories: Reversing
 comments: true
 ---
