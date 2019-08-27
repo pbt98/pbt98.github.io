@@ -58,3 +58,54 @@ HANDLE WINAPI CreateRemoteThread (
 * CreateRemoteThread()를 호출해서 lpStartAddress에 **LoadLibrary()** 주소를 입력하고 lpParameter에 인젝션을 원하는 'DLL의 경로 문자열 주소'를 주면 된다. -> **CreateRemoteThread()는 실제로 LoadLibraryW()를 호출하도록 만드는 역할이다.**  
 
 # 23.4.3) 디버깅 방법  
+* myhack.dll이 injection 되었을 때를 찾아서 Entry Point로 가야한다.  
+* Injection 관련 디버깅을 할땐 ollydbg 2.xx를 쓰는 것이 편하다 서술되어있다.  
+* 하는 순서:  
+1. notepad.exe 실행  
+2. ollydbg 실행  
+3. ollydbg에서 notepad.exe를 Attach 하기  
+4. Option -> Event -> Pause on new module(DLL)에 체크해준다.  
+5. Attach된 직후엔 프로세스가 일시 정지 되어있는데, F9으로 실행 상태로 만들어 준다.  
+6. InjectDll.exe를 이용해서 myhack.dll을 인젝션 한다. -> **이때 myhack.dll의 경로는 상대경로가 아니라 절대경로여야 한다!!** -> 여기서 일주일 정도 씀...  
+7. ollydbg에서 F9을 누르다 보면 module myhack.dll의 EP에 도착한다.  
+
+* 순서를 잘 지켜줘야한다. 순서가 꼬이고 절대 경로를 쓰지 않아서 많이 헤매었다.  
+![image](/asset/image.JPG)  
+* EP를 찾아냈다.  
+
+## 23.5) AppInit_DLLs  
+* DLL 인젝션을 하기 위한 방법으로는 **레지스트리**를 이용하는 방법 또한 존재한다.  
+* Windows 운영체제에서 기본으로 제공하는 AppInit_DLLs, LoadAppInit_DLLs 레지스트리 항목이 존재한다.  
+* **컴퓨터\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows**에 존재한다.  
+![235](/asset/235.JPG)  
+* AppInit_DLLs 항목에 인젝션을 원하는 **DLL 경로 문자열**을 쓰고, LoadAppInit_DLLs 항목의 값을 **1**로 변경한 후 재부팅하면, **실행되는 모든 프로세스에 해당 DLL을 인젝션**해준다.  
+
+# 23.5.1) 예제 소스코드 분석  
+&nbsp;&nbsp;**Myhack2.cpp**  
+* 현재 자신을 로딩한 프로세스 이름이 'notepad.exe'와 같다 -> IE를 숨김 모드로 실행시켜 Naver 사이트에 접속한다.  
+
+# 23.5.2) 실습 예제 myhack2.dll  
+&nbsp;&nbsp;**레지스트리 값 입력**  
+![appinit](/asset/appinit.JPG)  
+* AppInit_DLLs 값에 C:\work\myhack2.dll을 입력해준다.  
+
+![1](/asset/1.JPG)  
+* LoadAppInit_DLLs의 값을 1로 바꿔준다.  
+
+&nbsp;&nbsp;**재부팅**  
+![inject](/asset/inj.JPG)  
+* user32.dll을 로딩하는 모든 프로세스에 인젝션된 것을 확인 가능하다.  
+
+![tree](/asset/tree.JPG)  
+* notepad.exe를 열었을 때는 IE가 숨김 속성으로 실행되는 것을 확인 가능하다.  
+
+## 23.6) SetWindowsHookEx()  
+* 메시지 후킹을 이용한 기법으로 21장에서 상세히 다뤘었다.  
+
+## 23.7) 마무리  
+&nbsp;&nbsp;**인젝션 종류**  
+1. 원격 스레드 생성(CreateRemoteThread() API)  
+2. 레지스트리 이용(AppInit_DLLs 값)  
+3. 메시지 후킹(SetWindowsHookEx() API)  
+* Win32 API에 대한 지식과 운영체제 전반적인 지식이 필요함을 절실히 느꼈다. 공백기간동안 도서관에서 운영체제를 공부하였으나, 사이트에 정리할만한 수준의 공부는 아니어서 포스팅은 우선 보류해두었다. 우선 부딪혀서 저 세 종류를 모두 해보았다는 것에 의의를 두자.  
+
