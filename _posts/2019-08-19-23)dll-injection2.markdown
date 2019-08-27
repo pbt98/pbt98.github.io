@@ -41,3 +41,20 @@ comments: true
 **pThreadProc = notepad.exe 프로세스 메모리 내의 LoadLibraryW() 주소**  
 **pRemoteBuf = notepad.exe 프로세스 메모리 내의 "c:\\work\\myhack.dll" 문자열 주소**  
 * LoadLibraryW() API를 호출하도록 하는 API는 기본 제공하지 않는다. -> 따라서 CreateRemoteThread()를 이용한다.  
+
+```  
+HANDLE WINAPI CreateRemoteThread (
+    __in    HANDLE                      hProcess, //프로세스 핸들  
+    __in    LPSECURITY                  lpThreadAttributes,  
+    __in    SIZE_T                      dwStackSize,  
+    __in    LPTHREAD_START_ROUTINE      lpStartAddress, //스레드 함수 주소  
+    __in    LPVOID                      lpParameter, //스레드 파라미터 주소  
+    __in    DWORD                       lpThreadId  
+);  
+```  
+
+* hProcess 파라미터가 스레드를 실행할 프로세스의 핸들이다.  
+* lpStartAddress, lpParameter 파라미터는 각각 스레드 함수 주소와 스레드 파라미터 주소인데, **이 주소들은 대상 프로세스의 가상 메모리 공간의 주소여야 한다.**  
+* CreateRemoteThread()를 호출해서 lpStartAddress에 **LoadLibrary()** 주소를 입력하고 lpParameter에 인젝션을 원하는 'DLL의 경로 문자열 주소'를 주면 된다. -> **CreateRemoteThread()는 실제로 LoadLibraryW()를 호출하도록 만드는 역할이다.**  
+
+# 23.4.3) 디버깅 방법  
