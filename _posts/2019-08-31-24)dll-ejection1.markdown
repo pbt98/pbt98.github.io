@@ -1,0 +1,86 @@
+---
+layout: post
+title:  "24. DLL ejection"
+date:   2019-08-31 20:11:00 +0900
+categories: Reversing
+comments: true
+---
+*DLL 이젝션은 프로세스에 강제로 삽입된 DLL을 빼내는 기법이다.*  
+
+## 24.1) DLL 이젝션 동작 원리  
+
+DLL 인젝션 | DLL 이젝션 |  
+|:---------|:-----------|  
+|대상 프로세스로 하여금 LoadLibrary() API를 호출하도록 만드는 것 | 대상 프로세스로 하여금 FreeLibrary() API를 호출하도록 만드는 것|  
+
+* 즉, 인젝션이나 이젝션 둘다 **CreateRemoteThread()** API를 호출하도록 만들어서 저 두 개의 API 주소를 넘겨줘야하는 것이다.  
+* lpStartAddress 파라미터에 FreeLibrary() API 주소를 넘겨주고, lpParameter에는 이젝션할 DLL의 HANDLE을 넘겨주면 된다.  
+  
+```  
+참고  
+Windows Kernel Object에게는 참조 카운트가 있는데, LoadLibrary("a.dll")를 10번 호출하면 a.dll에 대한 참조 카운트도 10이 돼서 나중에 a.dll을 해제할 때 역시 FreeLibrary()를 10번 호출해줘야한다. -> 이 카운트를 매우 잘 고려해야한다.  
+```  
+
+## 24.2) DLL 이젝션 구현  
+# 24.2.1) 프로세스에 로딩된 DLL 정보 구하기  
+**hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPID);**  
+* CreateToolhelp32Snapshot() API를 이용하면 **프로세스에 로딩된 모듈(DLL)의 정보를 얻을 수 있다.**  
+* 이렇게 구한 hSnaphot 핸들을 Module32First()/Module32Next() 함수에 넘겨주면 MODULEENTRY32 구조체에 해당 모듈의 정보가 세팅된다.  
+
+```C  
+typedef struct tagMODULEENTRY32 {
+    DWORD dwSize;
+    DWORD th32ModuleID;  //This module
+    DWORD th32ProcessID;  //owning process  
+    DWORD GlblcntUsage;  // Global usage count on the module  
+    DWORD ProccntUsage;  // Module usage count in th32ProcessID's context  
+    BYTE *modBaseAddr;  // Base address of module in th32ProcessID's context  
+    DWORD modBaseSize;  // Size in bytes of module starting at modBaseAddr  
+    HMODULE hModule;  //The hModule of this module in th32ProcessID's context  
+    char szModule[MAX_MODULE_NAME32 + 1];
+    char szExePath[MAX_PATH];
+} MODULEENTRY32;  
+```  
+
+* szModule = DLL 이름, modBaseAddr = 해당 DLL이 로딩된 주소(프로세스 가상 메모리)
+
+# 24.2.2) 대상 프로세스 핸들 구하기  
+**hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPID);**  
+* 프로세스 ID를 이용해서 대상 프로세스(notepad)의 프로세스 핸들을 구한다.  
+* 나중에 CreateRemoteThread() API를 호출할 때 이 핸들이 쓰인다.  
+
+# 24.2.3) FreeLibrary() API 주소 구하기  
+**hModule = GetModuleHandle(L"kernel32.dll");**  
+**pThreadProc = (LPTHREAD_START_ROUTINE)GetProcAddress(hModule, "FreeLibrary");**  
+* notepad 프로세스로 하여금 FreeLibrary() API를 호출하도록 하려면 FreeLibrary()의 주소를 알아야함. -> 위 코드는 **notepad.exe 프로세스에 로딩된 Kernel32!FreeLibrary 주소가 아니라** EjectDll.exe 프로세스에 로딩된 Kernel32!FreeLibrary 주소를 얻어오고 있다. -> **FreeLibrary 주소는 모든 프로세스에 대해 동일하다.**  -> Kernel32.dll은 프로세스마다 같은 주소에 로딩되니까
+!
+
+# 24.2.4) 대상 프로세스에 스레드를 실행시킴  
+**hThread = CreateRemoteThread(hProcess, NULL, 0, pThreadProc, me.modBaseAddr, 0, NULL);**  
+* pThreadProc = FreeLibrary() API의 주소, me.modBaseAddr = 이젝션하길 원하는 DLL의 로딩 주소  
+
+```C  
+BOOL WINAPI FreeLibrary(  
+    HMODULE hLibModule  
+);  
+```  
+
+## 24.3) DLL 이젝션 간단 실습  
+# 24.3.1) 파일 복사 및 notepad.exe 실행  
+* c:\work에 파일 복사  
+* notepad.exe PID 확인  
+![2672](/asset/2672.JPG)  
+
+# 24.3.2) 인젝션  
+* 23장과 같다. Process Explorer에서 myhack.dll이 인젝션 됐는지 확인만 해주면 된다.  
+
+# 24.3.3) 이젝션  
+![before](/asset/before.JPG)  
+![ing](/asset/ing.JPG)  
+![after](/asset/after.JPG)  
+
+```  
+참고:  
+FreeLibrary()로 DLL을 제거하는 방식은 CreateRemoteThread()로 인젝션한 것 처럼 강제로 유저가 인젝션한 DLL만 이젝션 가능하다.  
+```  
+
