@@ -1,0 +1,189 @@
+---
+layout: post
+title:  "25. DLL loading by PE patch"
+date:   2019-09-02 07:46:00 +0900
+categories: Reversing
+comments: true
+---
+*지금까지는 원하는 DLL을 '실행 중인 프로세스'에 강제로 인젝션하는 법을 배웠지만, 이번에는 대상 프로그램의 '실행 파일을 직접 수정'해서 DLL을 강제로 로딩해보는 장이다.*  
+
+## 25.1) 실습 파일  
+* 목표: TextView.exe 파일을 직접 수정하여 실행 시 myhack3.dll을 로딩하도록 한다.  
+
+# 25.1.1) TextView.exe  
+* 복습: IDT(Import Directory Table)은 로드하는 DLL의 목록을 포함한다.  
+
+![original](/asset/original.JPG)  
+* KERNEL32.dll, USER32.dll, GDI32.dll, SHELL32.dll이 로드될 예정이다.  
+
+# 25.1.2) TextView_patched.exe  
+![patched3](/asset/patched3.JPG)  
+* IDT에 myhack3.dll이 로드된 모습을 볼 수 있다.  
+* 실행 후 보면 삽입된 dll에 의하여 구글의 index.html이 드랍된 것을 볼 수 있다.  
+![index](/asset/index.JPG)  
+
+## 25.2) 소스코드 - myhack3.cpp  
+* 이번 소스의 DllMain의 기능은 단순히 사용자 스레드를 실행시키는 것이다.  
+* 스레드 프로시저에서 DownloadURL()과 DropFile() 함수를 호출하여 실제적인 작업을 수행한다.  
+
+# 25.2.2) DownloadURL()  
+
+```C  
+BOOL DownloadURL(LPCTSTR szURL, LPCTSTR szFile);  
+```  
+
+* szURL에 명시된 인터넷 파일을 다운받아 szFile 경로에 저장하는 기능을 수행한다.  
+
+# 25.2.3) DropFile()  
+
+```C  
+BOOL DropFile(LPCTSTR wcsFile);  
+```  
+
+* 다운받은 index.html 파일을 TextView_Patch.exe 프로세스에 드롭시켜 그 내용을 보여준다. 이를 위해 프로세스의 메인 Window Handle을 구해서 WM_DROPFILES 메시지를 전송한다. PID로부터 Windows Handle을 구하여 PostMessage(WM_DROPFILES) API를 호출하는 것이 주요 내용이다.  
+
+# 25.2.4) dummy()  
+* myhack3.dll 파일에서 외부로 서비스하는 Export 함수이다. 단지 myhack3.dll을 TextView.exe 파일의 **임포트 테이블**에 추가시킬 수 있도록 형식적인 완전성을 제공하기 위함이다.  
+
+## 25.3) TextView.exe 파일 패치 준비 작업  
+
+# 25.3.1) 패치 아이디어  
+* IDT에는 PE 파일에서 임포트하는 DLL에 대한 정보들이 **구조체 리스트** 형식으로 저장되어있다. -> 이 리스트의 마지막에 myhack3.dll을 추가하면 되는 것이다.  
+* 그러나, 여유 공간 확인은 필요하다.  
+
+# 25.3.2) 패치 사전 조사  
+* PEView를 이용하여 TextView.exe의 IDT 주소를 확인한다. -> IMAGE_OPTIONAL_HEADER -> IMPORT Table RVA = IDT의 RVA  
+![idt](/asset/idt.JPG)  
+![idt1](/asset/idt1.JPG)  
+
+* TextView.exe의 IDT는 '.rdata' 섹션에 존재한다.  
+* 임포트하는 DLL 파일 하나당 IID(IMAGE_IMPORT_DESCRIPTOR) 구조체가 하니씩 필요하고 마지막은 NULL 구조체로 끝난다.  
+* 구조체 하나의 크기는 14바이트이다.  
+
+```C  
+typedef struct _IMAGE_IMPORT_DESCRIPTOR {
+    union {  
+        DWORD Characteristics;  
+        DWORD OriginalFirstThunk;  //RVA to INT(Import Name Table)  
+    };  
+    DWORD TimeDateStamp;  
+    DWORD ForwarderChain;  
+    DWORD Name;  
+    DWORD FirstThunk;  
+} IMAGE_IMPORT_DESCRIPTOR;  
+```  
+
+* PEView의 주소 보기 옵션을 'File Offset'으로 변환하면 IDT의 파일 옵셋은 76CC이다.  
+![pFile](/asset/pFile.JPG)  
+
+* HxD로 살펴보면 myhack3.dll이 들어갈 14바이트 크기의 공간이 없음을 알 수 있었다.  
+![no](/asset/no.JPG)  
+
+# 25.3.3) IDT 이동  
+* IDT를 좀 더 넓은 위치로 옮긴 후 새로운 IID를 추가시켜야 할 상황인데, 선택지를 생각해보면 이러하다.  
+1. 파일의 다른 빈 영역을 찾는다.  
+2. 파일 마지막 섹션의 크기를 늘린다.  
+3. 파일 끝에 새로운 섹션을 추가한다.  
+
+* 1번을 시도해보면, .rdata 맨 끝부분에는 알맞은 크기가 비어있음을 확인할 수 있다.  
+* 이 Null-Padding 영역(RVA: 8C60 ~ 8DFF)으로 추정되는 곳이 진짜 Null-Padding 인지 확인해야하는데, 이것을 확인하려면 **섹션 헤더에 로드하라고 명시된 영역인지 아닌지 판별해야한다.**    
+![blank](/asset/blank.JPG)  
+
+* .rdata 섹션 분석  
+![rd](/asset/rd.JPG)  
+
+| Item | Value | Comment |  
+|:---------|:--------|:-----------|  
+| Pointer to Raw Data | 5200 | [파일] 섹션의 시작 |  
+| Size of Raw Data | 2E00 | [파일] 섹션의 크기 |  
+| RVA | 6000 | [메모리] 섹션의 시작 |  
+| Virtual Size | 2C56 | [메모리] 섹션의 크기 |  
+
+* **파일과 메모리에서 섹션의 크기가 서로 다르다는 것**을 눈여겨 봐야한다. -> **섹션의 파일 크기는 2E00이지만, 파일이 실행되어 메모리에 로딩될 때 실제 프로그램에서 사용되는 데이터의 크기는 2C56 뿐이라는 뜻**   
+* 매핑되는 크기가 2C56 이라는 것을 확인했으므로, 나머지 사용되지 않는 크기는 1AA(2E00 - 2C56)이고, 이 위치에 IDT를 재구성하는 것은 문제가 되지 않는다.  
+
+```  
+참고: NULL로 채워져있다고 무조건 Null-Padding 영역이 아니다. 판단하려면 섹션 헤더의 정보를 확인하는 작업이 꼭 필요하다.  
+```  
+
+* 따라서 새로운 IDT를 **RVA:8C80(RAW: 7E80)** 위치에 생성하겠다. -> 특별한 계산법이 존재하는건가...?  
+
+## 25.4) TextView.exe 패치 작업  
+* PEView로는 원본 파일을 열어서 각 PE 정보를 확인하는 데 사용하고, HxD로는 TextView_Patch.exe 파일을 열어서 실제로 값을 변경시키는데 사용예정이다.  
+
+# 25.4.1) IMPORT Table의 RVA 값 변경  
+* **IMAGE_OPTIONAL_HEADER의 IMPORT Table 구조체 멤버는 IDT의 위치(RVA)와 크기를 알려준다.**  
+![jeon](/asset/jeon.JPG)  
+
+* 이 RVA 값을 새로운 IDT의 RVA 값인 8C80으로 변경하고 Size 값을 기존 64에 14(IID 구조체의 크기)를 더한 값인 78로 변경한다.  
+![byun](/asset/byun.JPG)  
+
+# 25.4.2) BOUND IMPORT TABLE 제거  
+* BOUND IMPORT TABLE은 DLL 로딩 속도를 조금 향상시킬 수 있는 기법이다.  
+![bit](/asset/bit.JPG)  
+
+* myhack3.dll을 정상적으로 임포트하기 위해서는 이 테이블에도 정보를 추가해야하지만, 옵션이므로 편의를 위해 제거한다.(0으로 변경하면 된다.)  
+* 실습 파일에선 value가 0으로 설정되어 있다.  
+
+# 25.4.3) 새로운 IDT 생성  
+* HxD로 기존 IDT(RAW: 76CC ~ 772F)를 전부 복사하여 새로운 IDT 위치(RAW)에 덮어쓰기 한다.  
+![write](/asset/write.JPG)  
+
+* 이 상태에서 다음과 같이 myhack3.dll을 위한 IID를 구성하여 새로 생성한 IDT의 끝(RAW:7ED0)에 추가시킨다.  
+![mod](/asset/mod.JPG)  
+
+```C  
+typedef struct _IMAGE_IMPORT_DESCRIPTOR {  
+    union {  
+        DWORD Characteristic;  
+        DWORD OriginalFirstThunk;  // 00008D00 => RVA to INT  
+    };  
+    DWORD TimeDateStamp;  // 0  
+    DWORD ForwarderChain;   // 0  
+    DWORD Name;  // 00008D10 => RVA to DLL Name  
+    DWORD FirstThunk;  // 00008D20 => RVA to IAT  
+} IMAGE_IMPORT_DESCRIPTOR;  
+```  
+
+* 위의 코드에 맞춰서 수정해줬다.(어차피 밑은 모두 Null-Padding 이므로 상관없다.)  
+# 25.4.4) Name, INT, IAT 셋팅  
+| | RVA | RAW |  
+|:-------|:--------|:---------|  
+|INT| 8D00| 7F00|  
+|Name|8D10|7F10|  
+|IAT|8D20|7F20|  
+
+* 이 주소들은 새로 생성한 IDT의 바로 아래쪽에 위치한다. HxD를 이용해서 7F00 위치로 가서 책에 나온대로 값을 입력한다.  
+![md](/asset/md.JPG)  
+
+* 8CD0 주소에 myhack3.dll을 위한 IID 구조체가 존재한다. 3개의 중요 멤버 **(RVA of INT, RVA of Name, RVA of IAT)**에 입력된 값들의 의미는 실제 INT, Name, IAT의 포인터 역할이다.  
+* INT(Import Name Table)는 **RVA 배열**인데, 배열의 각 원소는 **임포트하는 함수의 Ordinal + Func Name String 구조체 형식의 주소(RVA)** 를 나타내며 배열의 끝은 NULL이다.  
+* INT에는 1개의 원소가 있고, 그 값은 8D30이다. 그 주소로 가면 임포트하려는 함수의 Ordinal(2 bytes)과 함수 이름 문자열("dummy")이 나타난다.  
+* Name은 임포트하는 함수를 제공하는 DLL 파일의 이름 문자열이다. 7F32 주소에서 "myhack3.dll" 문자열이 보인다.  
+* IAT 역시 RVA 배열이다. **INT와 같은 값을 가져도 좋고 다른 값을 가져도 좋다.** (INT가 정확하다면 IAT는 다른 값을 가져도 상관없다.) -> 실제 PE 로더는 메모리상의 IAT 위치는 실제 함수 주소로 덮어쓰기 때문이다.  
+
+# 25.4.5) IAT 섹션의 Characteristics 변경  
+* IAT는 PE 로더에 의해서 메모리에 로딩될 때 실제 함수 주소로 덮어쓰기 때문에 해당 섹션은 **반드시 WRITE 속성을** 가지고 있어야한다. 따라서 PEView로 .rdata 섹션 헤더를 보면 밑의 그림과 같다.  
+![rdsec](/asset/rdsec.JPG)  
+
+* 원래 Characteristics 값 40000040에 IMAGE_SCN_MEM_WRITE(80000000) 속성 값을 추가하기 위해선 bit OR 연산을 수행해야하는데, 그러면 최종 값은 C0000040이다.  
+![calc](/asset/calc.JPG)  
+![modif](/asset/modif.JPG)  
+
+```  
+참고: .rdata 섹션은 원래부터 쓰기 속성이 없었지만 프로그램은 잘 실행되었었다. 그러나 이 파일에서 헤더를 수정하지 않으면 안되는데 그 이유는 IMAGE_OPTIONAL_HEADER 구조체의 Data Directory 배열 중 'IMPORT Address Table'이다.  
+이곳에 명시된 주소영역에 IAT가 존재하면 그 섹션에는 쓰기 속성이 없어도 된다.(왜?) 만약 TextView_Patch.exe에서 .rdata 섹션에 쓰기 속성을 주지 않으려면 기존 IAT 영역 뒤에 dummy()를 위한 IAT를 추가시키고 IMPORT Address Table의 크기를 8바이트 늘려주면 된다.  
+```  
+
+## 25.5) 검증  
+![complete](/asset/complete.JPG)  
+![complete2](/asset/complete2.JPG)  
+
+* IDT에 myhack3.dll을 임포트하기 위한 IID 구조체가 정상적으로 세팅되었다.  
+* **새로운 IDT를 생성할 때 Ctrl + V를 눌렀더니 아무래도 뒤의 내용이 밀리면서 그 내용 전체를 삽입하는 식으로 된듯하다. 수정하면서 할땐 Ctrl + B를 누르도록 하자.**  
+![hehe](/asset/hehe.JPG)  
+
+# 25.6) 마무리  
+&nbsp;&nbsp; 개강하면서 시작한 쳅터라 꽤나 시간이 걸렸다. 마지막에 삽입 문제 때문에 많은 시간을 삽질에 쏟았지만 HxD의 제대로 된 사용법을 알아가는 시간이었기에 낭비한 시간이었다고는 생각하지 않는다.  
+&nbsp;&nbsp; 간단하게는 우선 Import Directory Table에 사용자 dll을 추가시켜서 실행 시키는 것이었는데, IDT를 전부 옮겨야하는 경우에 대해서 실습을 진행했다. .rdata 섹션의 뒤쪽에 Null-Padding이 있음을 .rdata 섹션 헤더의 파일 <-> 메모리 로드 크기를 비교해서 알아냈고, IMAGE_OPTIONAL_HEADER의 IMPORT Table의 값을 조정하여 IDT가 위치하는 곳을 수정해주고, .rdata 섹션에 PE 로더를 위해서 쓰기 권한을 섹션 헤더의 Characteristic을 통해서 주어서 실행시켰다.  
+&nbsp;&nbsp;의문점은 IMPORT Table 항목과 Import Address Table 항목의 상관관계 유무 여부가 있었고, 복습 내용은 **RVA - VirtualAddress = RAW - PointerToRawData 이다.**

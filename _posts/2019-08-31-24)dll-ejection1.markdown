@@ -9,7 +9,7 @@ comments: true
 
 ## 24.1) DLL 이젝션 동작 원리  
 
-DLL 인젝션 | DLL 이젝션 |  
+| DLL 인젝션 | DLL 이젝션 |  
 |:---------|:-----------|  
 |대상 프로세스로 하여금 LoadLibrary() API를 호출하도록 만드는 것 | 대상 프로세스로 하여금 FreeLibrary() API를 호출하도록 만드는 것|  
 
