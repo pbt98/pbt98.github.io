@@ -147,6 +147,7 @@ typedef struct _IMAGE_IMPORT_DESCRIPTOR {
 
 * 위의 코드에 맞춰서 수정해줬다.(어차피 밑은 모두 Null-Padding 이므로 상관없다.)  
 # 25.4.4) Name, INT, IAT 셋팅  
+
 | | RVA | RAW |  
 |:-------|:--------|:---------|  
 |INT| 8D00| 7F00|  
