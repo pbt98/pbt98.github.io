@@ -13,3 +13,4 @@ Usage: tr [OPTION] ...SET1 SET2
 
 * 간단하게 SET1에 해당되는 것들을 SET2에 일대일로 치환하는 역할을 하는 명령어다.  
 * 예시) tr 'a-z' 'n-za-m' == tr 'abcdefghijk...z' 'nopqrstuv...zabcdef...m'  
+* 얻어낸 암호: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu  
