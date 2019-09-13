@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Bandit 11"
+date:   2019-09-14 01:36:00 +0900
+categories: Wargame
+comments: true
+---
+## tr 명령어  
+
+```  
+Usage: tr [OPTION] ...SET1 SET2  
+```  
+
+* 간단하게 SET1에 해당되는 것들을 SET2에 일대일로 치환하는 역할을 하는 명령어다.  
+* 예시) tr 'a-z' 'n-za-m' == tr 'abcdefghijk...z' 'nopqrstuv...zabcdef...m'  
