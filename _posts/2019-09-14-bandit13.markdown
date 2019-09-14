@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Bandit 13"
+date:   2019-09-14 09:43:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* ssh 접속의 공개키 인증 방식을 이해했어야했다.  
+* ssh 서버 내에서 동일한 서버로 ssh 접속을 시도할땐 localhost라 써야하는 것을 알아야했다.  
+
+## 과정  
+1. ssh -i sshkey.private bandit14@localhost  
+2. cat /etc/bandit_pass/bandit14  
+3. 얻어낸 키: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e  
