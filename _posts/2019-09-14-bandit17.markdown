@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Bandit 17"
+date:   2019-09-14 23:46:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* diff 명령어의 사용법을 알아야했다.  
+* bash에서의 몇가지 특수 문자의 의미를 알아야했다.  
+
+## 과정  
+1. diff passwords.new passwords.old  
+2. 위의 것이 첫번째, 밑의 것이 두번째 이다.  
+3. 얻어낸 키: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd  
