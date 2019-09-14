@@ -1,0 +1,24 @@
+---
+layout: post
+title:  "Bandit 16"
+date:   2019-09-14 18:03:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* nmap을 이용한 포트 스캔이 필요했다.  
+* 문제에서 지정된 포트가 아니면 무엇을 입력해도 그대로 출력된다고 보장했으므로 브루트 포스로 풀어도 괜찮다 생각했다.  
+* bandit13에서 했던 기법이 필요했다.(키를 이용한 ssh 접속)  
+* <, >, | 와 같은 bash 특수 문자를 알아야 수월하다.  
+
+## 과정  
+1. nmap -p 31000-32000 localhost  
+![localhost](/asset/localhost.JPG)  
+2. 두 포트 모두 브루트 포스 해본다. -> by openssl  
+3. 31790이 옳은 포트임을 알 수 있다.  
+4. cat을 이용하여 private 키를 저장한다.(/tmp/pbt981)  
+5. ssh에 접속한다.  
+6. bandit_pass에서 얻어낸 키: xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn  
+
+## 비고  
+* ssh key를 저장할 때는 마지막에서 꼭 개행 해줘야 인식한다.  
