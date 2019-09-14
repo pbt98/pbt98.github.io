@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Bandit 15"
+date:   2019-09-14 17:11:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* openssl의 기본적인 사용법에 관한 내용을 알고 있어야했다.  
+
+## 과정  
+1. openssl s_client -connect localhost:30001  
+2. 전편의 비밀번호 입력  
+3. 얻어낸 키: cluFn7wTiGryunymYOu4RcffSxQluehd  
+
+## 의문  
+* s_client의 역할  
+* openssl의 세부 정보  
+* 웹페이지에 있던 note의 내용  
