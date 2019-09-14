@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "Bandit 14"
+date:   2019-09-14 11:08:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* telnet의 동작 원리를 알아야했다.  
+* TCP/IP, UDP 프로토콜에 대한 이해가 필요하다.  
+
+## 과정  
+1. telnet localhost 30000
+2. bandit 13의 비밀번호 입력  
+3. 얻어낸 키: BfMYroe26WYalil77FoDi9qh59eK5xNr
