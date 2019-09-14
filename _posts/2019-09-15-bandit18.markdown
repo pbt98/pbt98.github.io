@@ -1,0 +1,14 @@
+---
+layout: post
+title:  "Bandit 18"
+date:   2019-09-15 00:07:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* ssh로 단순 접속 뿐만 아니라 명령어 실행이 바로 가능하다는 것을 알아야했다.  
+* ssh로 바로 실행시킨 명령어는 .bashrc를 로드하는 것보다 우선순위를 가진다.  
+
+## 과정  
+1. ssh -p 2220 bandit18@bandit.labs.overthewire.org cat readme  
+2. 얻어낸 키: IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x  
