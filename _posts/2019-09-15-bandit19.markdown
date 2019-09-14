@@ -1,0 +1,18 @@
+---
+layout: post
+title:  "Bandit 19"
+date:   2019-09-15 00:23:00 +0900
+categories: Wargame
+comments: true
+---
+## 개괄  
+* setUID, setGID에 대해서 공부해야했다.  
+* setUID binary에 대해서 알고 있어야했다.  
+* setUID ELF가 무엇인지 알아야했다.  
+
+## 과정  
+1. ls -al로 권한을 확인했다.  
+2. file로 무슨 파일인지 알아냈다.  
+3. ./bandit20-do
+4. ./bandit20-do cat /etc/bandit_pass/bandit20  
+5. 얻어낸 키: GbKksEFF4yrVs6il55v6gwY5aVje5f0j  
