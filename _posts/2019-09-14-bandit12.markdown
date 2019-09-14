@@ -1,0 +1,80 @@
+---
+layout: post
+title:  "Bandit 12"
+date:   2019-09-14 09:43:00 +0900
+categories: Wargame
+comments: true
+---
+
+## 개괄  
+* Hexdump란? 램 또는 파일이나 저장장치에 있는 컴퓨터 데이터를 16진법을 이용해서 볼 수 있게 만들어 놓은 것이다. -> 결국에 데이터의 모양  
+* 힌트 페이지에서 이 Hexdump는 반복적으로 압축된 파일의 Hexdump라 했었는데, Hexdump의 정의를 잘못 이해하는 바람에 많이 애먹었다.  
+
+## 풀이  
+1. xxd -r을 이용해서 Hexdump 파일을 바이너리 파일로 되돌린다.  
+2. file 명령어를 이용해서 어떤 파일이었는지 알아본다.  
+3. gunzip, bzip2, tar를 이용해서 ASCII text 평문이 뜰때까지 압축을 해제한다.  
+4. 얻어낸 비밀번호: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL  
+
+## 명령어 사용법  
+* tar [OPTION...] [FILE]...  
+-f : 대상 tar 아카이브 지정. (기본 옵션)  
+-c : tar 아카이브 생성. 기존 아카이브 덮어 쓰기. (파일 묶을 때 사용)  
+-x : tar 아카이브에서 파일 추출. (파일 풀 때 사용)  
+-v : 처리되는 과정(파일 정보)을 자세하게 나열.  
+-z : gzip 압축 적용 옵션.  
+-j : bzip2 압축 적용 옵션.  
+-t : tar 아카이브에 포함된 내용 확인.  
+-C : 대상 디렉토리 경로 지정.  
+-A : 지정된 파일을 tar 아카이브에 추가.  
+-d : tar 아카이브와 파일 시스템 간 차이점 검색.  
+-r : tar 아카이브의 마지막에 파일들 추가.  
+-u : tar 아카이브의 마지막에 파일들 추가.  
+-k : tar 아카이브 추출 시, 기존 파일 유지.  
+-U : tar 아카이브 추출 전, 기존 파일 삭제.  
+-w : 모든 진행 과정에 대해 확인 요청. (interactive)  
+-e : 첫 번째 에러 발생 시 중지.  
+
+* gzip [OPTION]... [FILE]...    
+ -c, --stdout write on standard output, keep original files unchanged  
+  -d, --decompress decompress  
+  -f, --force force overwrite of output file and compress links  
+  -h, --help give this help  
+  -k, --keep keep (don't delete) input files  
+  -l, --list list compressed file contents  
+  -L, --license display software license  
+  -n, --no-name do not save or restore the original name and time stamp  
+  -N, --name save or restore the original name and time stamp  
+  -q, --quiet suppress all warnings  
+  -r, --recursive operate recursively on directories  
+  -S, --suffix=SUF use suffix SUF on compressed files  
+  -t, --test test compressed file integrity  
+  -v, --verbose verbose mode(상세 정보 모두 표시하면서 압축해제)  
+  -V, --version display version number  
+  -1, --fast compress faster  
+  -9, --best compress better  
+  --rsyncable Make rsync-friendly archive  
+
+* bzip2 [flags and input files in any order]  
+-h --help print this message  
+-d --decompress force decompression  
+-z --compress force compression  
+-k --keep keep (don't delete) input files  
+-f --force overwrite existing output files  
+-t --test test compressed file integrity  
+-c --stdout output to standard out  
+-q --quiet suppress noncritical error messages  
+-v --verbose be verbose (a 2nd -v gives more)  
+-L --license display software version & license  
+-V --version display software version & license  
+-s --small use less memory (at most 2500k)  
+-1 .. -9 set block size to 100k .. 900k  
+--fast alias for -1
+--best alias for -9  
+If invoked as 'bzip2', default action is to compress.  
+as 'bunzip2',  default action is to decompress.  
+as 'bzcat', default action is to decompress to stdout.  
+If no file names are given, bzip2 compresses or decompresses from standard input to standard output.  
+You can combine short flags, so `-v -4' means the same as -v4 or -4v, &c
+## 비고  
+* tar를 '압축한다'라고 표현하는 경우가 종종 있는데, tar는 파일을 한 곳에 모아놓는 아카이브 역할을 할 뿐이지 압축 자체를 실행하지는 않는다.  
