@@ -12,3 +12,5 @@ comments: false
 
 ### Profile
 * 2018.12 ~ 2019.11 Hycube Vice-president
+* 2019.11 ~ Undergraduate Researcher at Hanyang University SSL lab.
+* 2019.11 ~ Hycube academic assistant
