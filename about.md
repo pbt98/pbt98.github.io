@@ -12,5 +12,9 @@ comments: false
 
 ### Profile
 * 2018.12 ~ 2019.11 Hycube Vice-president
-* 2019.11 ~ Undergraduate Researcher at Hanyang University System Security Lab
+* 2019.11 ~ Undergraduate Researcher at Hanyang University System Security Lab.
 * 2019.11 ~ Hycube academic assistant
+
+### Awards
+* 2019.05 HEPC(Hanyang ERICA Programming Contest), Excellence Prize
+* 2019.10 HESH(Hanyang ERICA Software Hackathon) 1st Prize
