@@ -2,7 +2,7 @@
 layout: post
 title:  "Starting Bixby Forensic"
 date:   2019-06-21 22:30:00 +0900
-categories: Paper
+categories: Graduate School
 comments: true
 ---
 # 소개
