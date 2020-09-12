@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-09-12T19:23:58+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Logs of my Life</title><subtitle>Hanyang University ERICA,  Division of Computer Science Studying Reverse Engineering</subtitle><entry><title type="html">2020 Recent</title><link href="http://localhost:4000/story/2020/08/11/ComeBack.html" rel="alternate" type="text/html" title="2020 Recent" /><published>2020-08-11T22:30:00+09:00</published><updated>2020-08-11T22:30:00+09:00</updated><id>http://localhost:4000/story/2020/08/11/ComeBack</id><content type="html" xml:base="http://localhost:4000/story/2020/08/11/ComeBack.html">&lt;h1 id=&quot;그간-있었던-일들&quot;&gt;그간 있었던 일들&lt;/h1&gt;
+&lt;p&gt;  한 해의 중반에 접어드는 지금, 나더러 2020년을 한 단어로 표현해보라 한다면 ‘고립’이 가장 잘 대표할 수 있는 단어라고 주저않고 말할 수 있다. 2년을 함께한 동기들은 각자의 사정으로 학교를 잠시 떠났고, 남은 이들은 COVID-19으로 인해 수업에서 보기는 힘들었다. 얼굴 보고 지낼 수 있는 이들과는 돈독해진 반면, 본래 비교적 소원했던 사람들과는 더 소원해지는 중인 한 해라고 생각한다.&lt;/p&gt;
+
+&lt;p&gt;  시스템 및 IoT 보안 연구실에 들어온지 어느덧 반년을 지나 1년을 향해 가고 있다. 책장과 책상, 다른 연구실에서 쓰지 않는다며 준 컴퓨터가 덩그러니 있던 연구실은 Passmark 1위를 달리는 CPU를 탑재한 서버와, 24TB NAS를 필두로 점점 연구실 다운 연구실이 되어간다. 혼자 있던 공간에 사람들이 들어오는 것이 괜히 탐탁치 않았던 나쁜 마음도 있었지만, 내가 배울 점이 너무나 많은 분들과 함께하고 있다는 것을 깨달은 지금은 하루하루가 내게는 축복이라 생각한다.&lt;/p&gt;
+
+&lt;p&gt;  4월에 시작한 Bixby 연구는 어느덧 종반에 접어들었다. 대학원생인듯 대학원생 아닌 학부생 두명이 시작한 이 연구는 국가보안기술연구소에서의 중간발표를 기점으로 리버싱 위주에서 패킷 분석, 변조 위주로 방향을 선회했다. 로컬에 남는 데이터가 없음을 확인한 현재로서는 이게 최선인듯하다.&lt;/p&gt;
+
+&lt;p&gt;  하이큐브는 COVID-19으로 인하여 친목 활동은 완전히 멈춘 상태다. 선배들과의 유일한 다리였던 창립제는 물건너 갔고 MT는 물론, 개강총회, 종강총회 또한 못하니 동아리의 기능에 대해 심각하게 문제가 생겼음을 임원진들은 인식하고 있다. 그나마 1학기에 진행한 파이썬 스터디에서의 인연으로 후배와 APK Crawler 제작을 진행 중이다만, 그냥 프로젝트에 참여하는 것에 의의를 두게 하는것이 맞는지, 좀 더 실질적인 코딩을 시키는 것이 맞는지는 아직까지 모르겠다. 시간을 두고 지켜봐야지.&lt;br /&gt;
+  그 외에는 신정규 교수님이 교편을 잠시 내려놓으면서 오픈소스 SW기초/개발 수업의 평이 많이 떨어졌다는 소식이 들려왔다. 이에 간단하게나마 몸으로 부딪혀가며 배운 Git/Github 기초와 팁들을 집대성해 스터디를 열어야겠다 생각했다. 제안서는 언제 써도 많은 기력을 요구하지만, 앞으로 몇 년간 나의 일에서 큰 비중을 차지할 일이니 열심히 써야겠다고 다짐한다.&lt;br /&gt;
+  그리고 2학기에는 안드로이드 앱 조작과 관련된 스터디를 열어볼까 한다. FRIDA를 통해서 FridaLab이라는 앱을 원하는 상태로 조작하는 단기 스터디로 생각중인데, 시각적으로 보이는 것이 밋밋하여 반응이 좋지 않을까 조금 주저하는 스터디이기도 하다. git 스터디가 끝나면 좀 더 구체화 해봐야지.&lt;/p&gt;
+
+&lt;h1 id=&quot;앞으로&quot;&gt;앞으로&lt;/h1&gt;
+&lt;p&gt;  가을학기에는 학점을 덜 듣는다. 연구 + 캡스톤 + 학점 + 동아리 넷을 챙기려면 이 정도의 선택은 필요하지 않을까 싶다. 그 동안 열심히 살았기에 학점을 덜 들어도 조기 졸업에는 큰 지장이 없다는 점이 이번 수강신청때 나를 꽤나 뿌듯하게 만들어줬다. Bixby 연구를 마치고 나면 SmartSwitch 연구로 넘어간다. 저번에도 그랬듯, 아마 이 앱도 어떻게든 리버싱할 수 있을 것이다.&lt;br /&gt;
+  캡스톤 또한 시작된다. 교수님은 원래 내셨던 Paper의 Extension을 나와 함께하고 싶어하신다. 이것을 위해 SoK Paper를 필두로 Signal Processing 방법과 ASR, SI에 대한 Adversarial Attack 기법에 대해 공부하는 중이다. 이 논문을 진행하다 보면 캡스톤의 결과물 또한 부산물로 따라올 것이라 굳게 믿고 앞으로 나아가야겠다.&lt;br /&gt;
+  마지막으로, 내 일이 너무 바빠도 챙길 사람들은 다 챙기도록 노력해야겠다. 우리 가족, 친구들, 연구실 사람들 등등… 내게는 너무나 소중한 사람들이다. 2020년은 용두용미의 해가 되도록 다시 다짐하며 글을 마친다.&lt;/p&gt;</content><author><name></name></author><category term="Story" /><summary type="html">그간 있었던 일들   한 해의 중반에 접어드는 지금, 나더러 2020년을 한 단어로 표현해보라 한다면 ‘고립’이 가장 잘 대표할 수 있는 단어라고 주저않고 말할 수 있다. 2년을 함께한 동기들은 각자의 사정으로 학교를 잠시 떠났고, 남은 이들은 COVID-19으로 인해 수업에서 보기는 힘들었다. 얼굴 보고 지낼 수 있는 이들과는 돈독해진 반면, 본래 비교적 소원했던 사람들과는 더 소원해지는 중인 한 해라고 생각한다.   시스템 및 IoT 보안 연구실에 들어온지 어느덧 반년을 지나 1년을 향해 가고 있다. 책장과 책상, 다른 연구실에서 쓰지 않는다며 준 컴퓨터가 덩그러니 있던 연구실은 Passmark 1위를 달리는 CPU를 탑재한 서버와, 24TB NAS를 필두로 점점 연구실 다운 연구실이 되어간다. 혼자 있던 공간에 사람들이 들어오는 것이 괜히 탐탁치 않았던 나쁜 마음도 있었지만, 내가 배울 점이 너무나 많은 분들과 함께하고 있다는 것을 깨달은 지금은 하루하루가 내게는 축복이라 생각한다.   4월에 시작한 Bixby 연구는 어느덧 종반에 접어들었다. 대학원생인듯 대학원생 아닌 학부생 두명이 시작한 이 연구는 국가보안기술연구소에서의 중간발표를 기점으로 리버싱 위주에서 패킷 분석, 변조 위주로 방향을 선회했다. 로컬에 남는 데이터가 없음을 확인한 현재로서는 이게 최선인듯하다.   하이큐브는 COVID-19으로 인하여 친목 활동은 완전히 멈춘 상태다. 선배들과의 유일한 다리였던 창립제는 물건너 갔고 MT는 물론, 개강총회, 종강총회 또한 못하니 동아리의 기능에 대해 심각하게 문제가 생겼음을 임원진들은 인식하고 있다. 그나마 1학기에 진행한 파이썬 스터디에서의 인연으로 후배와 APK Crawler 제작을 진행 중이다만, 그냥 프로젝트에 참여하는 것에 의의를 두게 하는것이 맞는지, 좀 더 실질적인 코딩을 시키는 것이 맞는지는 아직까지 모르겠다. 시간을 두고 지켜봐야지.   그 외에는 신정규 교수님이 교편을 잠시 내려놓으면서 오픈소스 SW기초/개발 수업의 평이 많이 떨어졌다는 소식이 들려왔다. 이에 간단하게나마 몸으로 부딪혀가며 배운 Git/Github 기초와 팁들을 집대성해 스터디를 열어야겠다 생각했다. 제안서는 언제 써도 많은 기력을 요구하지만, 앞으로 몇 년간 나의 일에서 큰 비중을 차지할 일이니 열심히 써야겠다고 다짐한다.   그리고 2학기에는 안드로이드 앱 조작과 관련된 스터디를 열어볼까 한다. FRIDA를 통해서 FridaLab이라는 앱을 원하는 상태로 조작하는 단기 스터디로 생각중인데, 시각적으로 보이는 것이 밋밋하여 반응이 좋지 않을까 조금 주저하는 스터디이기도 하다. git 스터디가 끝나면 좀 더 구체화 해봐야지.</summary></entry><entry><title type="html">Starting Bixby Forensic</title><link href="http://localhost:4000/laboratory/2020/04/10/Starting-Bixby-Forensic.html" rel="alternate" type="text/html" title="Starting Bixby Forensic" /><published>2020-04-10T22:30:00+09:00</published><updated>2020-04-10T22:30:00+09:00</updated><id>http://localhost:4000/laboratory/2020/04/10/Starting-Bixby-Forensic</id><content type="html" xml:base="http://localhost:4000/laboratory/2020/04/10/Starting-Bixby-Forensic.html">&lt;h1 id=&quot;소개&quot;&gt;소개&lt;/h1&gt;
+&lt;p&gt;Library Detection과 관련된 연구를 진행하던 중에 필요한 정보를 뽑아낼 수 있는 테크닉이 부족하다 느껴 공부를 하고있었다.
+Bixby는 안드로이드 시스템과도 밀접한 관련을 가진 앱이고, 이 앱이 데이터를 저장하는 메커니즘을 알아낼 수 있다면 다른 앱에서의 Library Detection에 대한 방법론도 조금은 윤곽이 잡히지 않을까 생각한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;우선-과제&quot;&gt;우선 과제&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;Android permission과 관련된 API에 집중&lt;/li&gt;
+  &lt;li&gt;Dynamic Analysis로 음성 파일이 저장되는 과정 확인&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Laboratory" /><summary type="html">소개 Library Detection과 관련된 연구를 진행하던 중에 필요한 정보를 뽑아낼 수 있는 테크닉이 부족하다 느껴 공부를 하고있었다. Bixby는 안드로이드 시스템과도 밀접한 관련을 가진 앱이고, 이 앱이 데이터를 저장하는 메커니즘을 알아낼 수 있다면 다른 앱에서의 Library Detection에 대한 방법론도 조금은 윤곽이 잡히지 않을까 생각한다.</summary></entry><entry><title type="html">Bandit 19</title><link href="http://localhost:4000/wargame/2019/09/15/bandit19.html" rel="alternate" type="text/html" title="Bandit 19" /><published>2019-09-15T00:23:00+09:00</published><updated>2019-09-15T00:23:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/15/bandit19</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/15/bandit19.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;setUID, setGID에 대해서 공부해야했다.&lt;/li&gt;
+  &lt;li&gt;setUID binary에 대해서 알고 있어야했다.&lt;/li&gt;
+  &lt;li&gt;setUID ELF가 무엇인지 알아야했다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ls -al로 권한을 확인했다.&lt;/li&gt;
+  &lt;li&gt;file로 무슨 파일인지 알아냈다.&lt;/li&gt;
+  &lt;li&gt;./bandit20-do&lt;/li&gt;
+  &lt;li&gt;./bandit20-do cat /etc/bandit_pass/bandit20&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: GbKksEFF4yrVs6il55v6gwY5aVje5f0j&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 setUID, setGID에 대해서 공부해야했다. setUID binary에 대해서 알고 있어야했다. setUID ELF가 무엇인지 알아야했다.</summary></entry><entry><title type="html">Bandit 18</title><link href="http://localhost:4000/wargame/2019/09/15/bandit18.html" rel="alternate" type="text/html" title="Bandit 18" /><published>2019-09-15T00:07:00+09:00</published><updated>2019-09-15T00:07:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/15/bandit18</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/15/bandit18.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ssh로 단순 접속 뿐만 아니라 명령어 실행이 바로 가능하다는 것을 알아야했다.&lt;/li&gt;
+  &lt;li&gt;ssh로 바로 실행시킨 명령어는 .bashrc를 로드하는 것보다 우선순위를 가진다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ssh -p 2220 bandit18@bandit.labs.overthewire.org cat readme&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 ssh로 단순 접속 뿐만 아니라 명령어 실행이 바로 가능하다는 것을 알아야했다. ssh로 바로 실행시킨 명령어는 .bashrc를 로드하는 것보다 우선순위를 가진다.</summary></entry><entry><title type="html">Bandit 17</title><link href="http://localhost:4000/wargame/2019/09/14/bandit17.html" rel="alternate" type="text/html" title="Bandit 17" /><published>2019-09-14T23:46:00+09:00</published><updated>2019-09-14T23:46:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit17</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit17.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;diff 명령어의 사용법을 알아야했다.&lt;/li&gt;
+  &lt;li&gt;bash에서의 몇가지 특수 문자의 의미를 알아야했다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;diff passwords.new passwords.old&lt;/li&gt;
+  &lt;li&gt;위의 것이 첫번째, 밑의 것이 두번째 이다.&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 diff 명령어의 사용법을 알아야했다. bash에서의 몇가지 특수 문자의 의미를 알아야했다.</summary></entry><entry><title type="html">Bandit 16</title><link href="http://localhost:4000/wargame/2019/09/14/bandit16.html" rel="alternate" type="text/html" title="Bandit 16" /><published>2019-09-14T18:03:00+09:00</published><updated>2019-09-14T18:03:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit16</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit16.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;nmap을 이용한 포트 스캔이 필요했다.&lt;/li&gt;
+  &lt;li&gt;문제에서 지정된 포트가 아니면 무엇을 입력해도 그대로 출력된다고 보장했으므로 브루트 포스로 풀어도 괜찮다 생각했다.&lt;/li&gt;
+  &lt;li&gt;bandit13에서 했던 기법이 필요했다.(키를 이용한 ssh 접속)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;&amp;lt;, &amp;gt;,&lt;/td&gt;
+          &lt;td&gt;와 같은 bash 특수 문자를 알아야 수월하다.&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;nmap -p 31000-32000 localhost&lt;br /&gt;
+&lt;img src=&quot;/asset/localhost.JPG&quot; alt=&quot;localhost&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;두 포트 모두 브루트 포스 해본다. -&amp;gt; by openssl&lt;/li&gt;
+  &lt;li&gt;31790이 옳은 포트임을 알 수 있다.&lt;/li&gt;
+  &lt;li&gt;cat을 이용하여 private 키를 저장한다.(/tmp/pbt981)&lt;/li&gt;
+  &lt;li&gt;ssh에 접속한다.&lt;/li&gt;
+  &lt;li&gt;bandit_pass에서 얻어낸 키: xLYVMN9WE5zQ5vHacb0sZEVqbrp7nBTn&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;비고&quot;&gt;비고&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ssh key를 저장할 때는 마지막에서 꼭 개행 해줘야 인식한다.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 nmap을 이용한 포트 스캔이 필요했다. 문제에서 지정된 포트가 아니면 무엇을 입력해도 그대로 출력된다고 보장했으므로 브루트 포스로 풀어도 괜찮다 생각했다. bandit13에서 했던 기법이 필요했다.(키를 이용한 ssh 접속) &amp;lt;, &amp;gt;, 와 같은 bash 특수 문자를 알아야 수월하다.</summary></entry><entry><title type="html">Bandit 15</title><link href="http://localhost:4000/wargame/2019/09/14/bandit15.html" rel="alternate" type="text/html" title="Bandit 15" /><published>2019-09-14T17:11:00+09:00</published><updated>2019-09-14T17:11:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit15</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit15.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;openssl의 기본적인 사용법에 관한 내용을 알고 있어야했다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;openssl s_client -connect localhost:30001&lt;/li&gt;
+  &lt;li&gt;전편의 비밀번호 입력&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: cluFn7wTiGryunymYOu4RcffSxQluehd&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;의문&quot;&gt;의문&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;s_client의 역할&lt;/li&gt;
+  &lt;li&gt;openssl의 세부 정보&lt;/li&gt;
+  &lt;li&gt;웹페이지에 있던 note의 내용&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 openssl의 기본적인 사용법에 관한 내용을 알고 있어야했다.</summary></entry><entry><title type="html">Bandit 14</title><link href="http://localhost:4000/wargame/2019/09/14/bandit14.html" rel="alternate" type="text/html" title="Bandit 14" /><published>2019-09-14T11:08:00+09:00</published><updated>2019-09-14T11:08:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit14</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit14.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;telnet의 동작 원리를 알아야했다.&lt;/li&gt;
+  &lt;li&gt;TCP/IP, UDP 프로토콜에 대한 이해가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;telnet localhost 30000&lt;/li&gt;
+  &lt;li&gt;bandit 13의 비밀번호 입력&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: BfMYroe26WYalil77FoDi9qh59eK5xNr&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 telnet의 동작 원리를 알아야했다. TCP/IP, UDP 프로토콜에 대한 이해가 필요하다.</summary></entry><entry><title type="html">Bandit 13</title><link href="http://localhost:4000/wargame/2019/09/14/bandit13.html" rel="alternate" type="text/html" title="Bandit 13" /><published>2019-09-14T09:43:00+09:00</published><updated>2019-09-14T09:43:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit13</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit13.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ssh 접속의 공개키 인증 방식을 이해했어야했다.&lt;/li&gt;
+  &lt;li&gt;ssh 서버 내에서 동일한 서버로 ssh 접속을 시도할땐 localhost라 써야하는 것을 알아야했다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;과정&quot;&gt;과정&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ssh -i sshkey.private bandit14@localhost&lt;/li&gt;
+  &lt;li&gt;cat /etc/bandit_pass/bandit14&lt;/li&gt;
+  &lt;li&gt;얻어낸 키: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 ssh 접속의 공개키 인증 방식을 이해했어야했다. ssh 서버 내에서 동일한 서버로 ssh 접속을 시도할땐 localhost라 써야하는 것을 알아야했다.</summary></entry><entry><title type="html">Bandit 12</title><link href="http://localhost:4000/wargame/2019/09/14/bandit12.html" rel="alternate" type="text/html" title="Bandit 12" /><published>2019-09-14T09:43:00+09:00</published><updated>2019-09-14T09:43:00+09:00</updated><id>http://localhost:4000/wargame/2019/09/14/bandit12</id><content type="html" xml:base="http://localhost:4000/wargame/2019/09/14/bandit12.html">&lt;h2 id=&quot;개괄&quot;&gt;개괄&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Hexdump란? 램 또는 파일이나 저장장치에 있는 컴퓨터 데이터를 16진법을 이용해서 볼 수 있게 만들어 놓은 것이다. -&amp;gt; 결국에 데이터의 모양&lt;/li&gt;
+  &lt;li&gt;힌트 페이지에서 이 Hexdump는 반복적으로 압축된 파일의 Hexdump라 했었는데, Hexdump의 정의를 잘못 이해하는 바람에 많이 애먹었다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;풀이&quot;&gt;풀이&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;xxd -r을 이용해서 Hexdump 파일을 바이너리 파일로 되돌린다.&lt;/li&gt;
+  &lt;li&gt;file 명령어를 이용해서 어떤 파일이었는지 알아본다.&lt;/li&gt;
+  &lt;li&gt;gunzip, bzip2, tar를 이용해서 ASCII text 평문이 뜰때까지 압축을 해제한다.&lt;/li&gt;
+  &lt;li&gt;얻어낸 비밀번호: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;명령어-사용법&quot;&gt;명령어 사용법&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;tar [OPTION…] [FILE]…&lt;br /&gt;
+-f : 대상 tar 아카이브 지정. (기본 옵션)&lt;br /&gt;
+-c : tar 아카이브 생성. 기존 아카이브 덮어 쓰기. (파일 묶을 때 사용)&lt;br /&gt;
+-x : tar 아카이브에서 파일 추출. (파일 풀 때 사용)&lt;br /&gt;
+-v : 처리되는 과정(파일 정보)을 자세하게 나열.&lt;br /&gt;
+-z : gzip 압축 적용 옵션.&lt;br /&gt;
+-j : bzip2 압축 적용 옵션.&lt;br /&gt;
+-t : tar 아카이브에 포함된 내용 확인.&lt;br /&gt;
+-C : 대상 디렉토리 경로 지정.&lt;br /&gt;
+-A : 지정된 파일을 tar 아카이브에 추가.&lt;br /&gt;
+-d : tar 아카이브와 파일 시스템 간 차이점 검색.&lt;br /&gt;
+-r : tar 아카이브의 마지막에 파일들 추가.&lt;br /&gt;
+-u : tar 아카이브의 마지막에 파일들 추가.&lt;br /&gt;
+-k : tar 아카이브 추출 시, 기존 파일 유지.&lt;br /&gt;
+-U : tar 아카이브 추출 전, 기존 파일 삭제.&lt;br /&gt;
+-w : 모든 진행 과정에 대해 확인 요청. (interactive)&lt;br /&gt;
+-e : 첫 번째 에러 발생 시 중지.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;gzip [OPTION]… [FILE]…  &lt;br /&gt;
+ -c, –stdout write on standard output, keep original files unchanged&lt;br /&gt;
+-d, –decompress decompress&lt;br /&gt;
+-f, –force force overwrite of output file and compress links&lt;br /&gt;
+-h, –help give this help&lt;br /&gt;
+-k, –keep keep (don’t delete) input files&lt;br /&gt;
+-l, –list list compressed file contents&lt;br /&gt;
+-L, –license display software license&lt;br /&gt;
+-n, –no-name do not save or restore the original name and time stamp&lt;br /&gt;
+-N, –name save or restore the original name and time stamp&lt;br /&gt;
+-q, –quiet suppress all warnings&lt;br /&gt;
+-r, –recursive operate recursively on directories&lt;br /&gt;
+-S, –suffix=SUF use suffix SUF on compressed files&lt;br /&gt;
+-t, –test test compressed file integrity&lt;br /&gt;
+-v, –verbose verbose mode(상세 정보 모두 표시하면서 압축해제)&lt;br /&gt;
+-V, –version display version number&lt;br /&gt;
+-1, –fast compress faster&lt;br /&gt;
+-9, –best compress better&lt;br /&gt;
+–rsyncable Make rsync-friendly archive&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;bzip2 [flags and input files in any order]&lt;br /&gt;
+-h –help print this message&lt;br /&gt;
+-d –decompress force decompression&lt;br /&gt;
+-z –compress force compression&lt;br /&gt;
+-k –keep keep (don’t delete) input files&lt;br /&gt;
+-f –force overwrite existing output files&lt;br /&gt;
+-t –test test compressed file integrity&lt;br /&gt;
+-c –stdout output to standard out&lt;br /&gt;
+-q –quiet suppress noncritical error messages&lt;br /&gt;
+-v –verbose be verbose (a 2nd -v gives more)&lt;br /&gt;
+-L –license display software version &amp;amp; license&lt;br /&gt;
+-V –version display software version &amp;amp; license&lt;br /&gt;
+-s –small use less memory (at most 2500k)&lt;br /&gt;
+-1 .. -9 set block size to 100k .. 900k&lt;br /&gt;
+–fast alias for -1
+–best alias for -9&lt;br /&gt;
+If invoked as ‘bzip2’, default action is to compress.&lt;br /&gt;
+as ‘bunzip2’,  default action is to decompress.&lt;br /&gt;
+as ‘bzcat’, default action is to decompress to stdout.&lt;br /&gt;
+If no file names are given, bzip2 compresses or decompresses from standard input to standard output.&lt;br /&gt;
+You can combine short flags, so `-v -4’ means the same as -v4 or -4v, &amp;amp;c
+    &lt;h2 id=&quot;비고&quot;&gt;비고&lt;/h2&gt;
+  &lt;/li&gt;
+  &lt;li&gt;tar를 ‘압축한다’라고 표현하는 경우가 종종 있는데, tar는 파일을 한 곳에 모아놓는 아카이브 역할을 할 뿐이지 압축 자체를 실행하지는 않는다.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><category term="Wargame" /><summary type="html">개괄 Hexdump란? 램 또는 파일이나 저장장치에 있는 컴퓨터 데이터를 16진법을 이용해서 볼 수 있게 만들어 놓은 것이다. -&amp;gt; 결국에 데이터의 모양 힌트 페이지에서 이 Hexdump는 반복적으로 압축된 파일의 Hexdump라 했었는데, Hexdump의 정의를 잘못 이해하는 바람에 많이 애먹었다.</summary></entry></feed>

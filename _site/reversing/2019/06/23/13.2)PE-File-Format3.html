@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>PE File-Format 3rd | Logs of my Life</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="PE File-Format 3rd" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="13.3.5) NT-Header - Optional Header 다음은 IMAGE_OPTIONAL_HEADER32의 주목해야할 맴버들이다." />
+<meta property="og:description" content="13.3.5) NT-Header - Optional Header 다음은 IMAGE_OPTIONAL_HEADER32의 주목해야할 맴버들이다." />
+<link rel="canonical" href="http://localhost:4000/reversing/2019/06/23/13.2)PE-File-Format3.html" />
+<meta property="og:url" content="http://localhost:4000/reversing/2019/06/23/13.2)PE-File-Format3.html" />
+<meta property="og:site_name" content="Logs of my Life" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-23T16:50:00+09:00" />
+<script type="application/ld+json">
+{"headline":"PE File-Format 3rd","dateModified":"2019-06-23T16:50:00+09:00","datePublished":"2019-06-23T16:50:00+09:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/reversing/2019/06/23/13.2)PE-File-Format3.html"},"url":"http://localhost:4000/reversing/2019/06/23/13.2)PE-File-Format3.html","description":"13.3.5) NT-Header - Optional Header 다음은 IMAGE_OPTIONAL_HEADER32의 주목해야할 맴버들이다.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Logs of my Life" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Logs of my Life</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/category/Laboratory.html">Laboratory</a><a class="page-link" href="/category/Reversing.html">Reversing</a><a class="page-link" href="/category/Story.html">Story</a><a class="page-link" href="/category/Wargame.html">Wargame</a><a class="page-link" href="/about/">About Me</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">13. PE File-Format 3rd</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-06-23T16:50:00+09:00" itemprop="datePublished">Jun 23, 2019
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="1335-nt-header---optional-header">13.3.5) NT-Header - Optional Header</h2>
+<p>다음은 <em>IMAGE_OPTIONAL_HEADER32</em>의 주목해야할 맴버들이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">자료형</th>
+      <th style="text-align: left">이름</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">WORD</td>
+      <td style="text-align: left">Magic</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">AddressOfEntryPoint</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">ImageBase</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">SectionAlignment</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">FileAlignment</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">SizeOfImage</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">SizeOfHeader</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">WORD</td>
+      <td style="text-align: left">Subsystem</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DWORD</td>
+      <td style="text-align: left">NumberOfRvaAndSizes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">IMAGE_DATA_DIRECTORY[]</td>
+      <td style="text-align: left">DataDirectory</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>Magic:<br />
+  IMAGE_OPTIONAL_HEADER32의 경우에는 10, IMAGE_OPTIONAL_HEADER64의 경우에는 20의 값을 가진다.</p>
+  </li>
+  <li>AddressOfEntryPoint:<br />
+  EP(Entry Point)의 RVA 값을 가지고 있다. <strong>프로그램에서 최초로 실행되는 코드의 시작 주소</strong>로 매우 중요한 값이다.</li>
+  <li>ImageBase:<br />
+  프로세스의 가상 메모리 32비트의 경우는 0 ~ FFFFFFFF 범위다.(64비트의 경우에는 검색 후 추가할 것.) 이렇게 광활한 메모리에서, 이 값은 <strong>PE 파일이 로딩되는 시작 주소</strong>를 나타낸다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">파일 형식</th>
+      <th style="text-align: left">영역</th>
+      <th style="text-align: left">로딩 범위</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">EXE, DLL</td>
+      <td style="text-align: left">user memory</td>
+      <td style="text-align: left">0 ~ 7FFFFFFF</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SYS</td>
+      <td style="text-align: left">Kernal memory</td>
+      <td style="text-align: left">80000000 ~ FFFFFFFF</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>일반적으로 개발 도구들이 만들어내는 exe 파일의 ImageBase 값은 00400000이고 DLL 파일의 ImageBase값은 10000000 이다.(다른 값이 저장될수도 있다.)<br />
+PE 로더는 PE 파일을 실행시키기 위해 프로세스를 생성하고 파일을 메모리에 로딩한 후, EIP 레지스터[^1.] 값을 ImageBase + AddressOfEntryPoint 값으로 셋팅한다.</p>
+  </li>
+  <li>
+    <p>SectionAlignment, FileAlignment:<br />
+  PE 파일의 바디부분은 섹션으로 나뉘어져 있다. <strong>파일에서 섹션의 최소단위</strong>를 나타낸 것이 FileAlignment, <strong>메모리에서 세션의 최소단위</strong>를 나타낸 것이 SectionAlignment이다.(둘은 같을수도 있고, 다를수도 있다.)<br />
+파일/메모리의 섹션 크기는 반드시 각각 FileAlignment/SectionAlignment의 <strong>배수</strong>가 되어야 한다.</p>
+  </li>
+  <li>
+    <p>SizeOfImage:<br />
+  PE 파일이 메모리에 로딩되었을 때, <strong>가상 메모리에서 PE Image가 차지하는 크기</strong>를 나타낸다.<br />
+일반적으로 파일의 크기와 메모리에 로딩된 크기는 다르다.</p>
+  </li>
+  <li>SizeOfHeader:<br />
+  <strong>PE 헤더의 전체 크기</strong>를 나타낸다. 이 값 역시 FileAlignment의 배수여야 한다.<br />
+파일 시작에서 SizeOfHedader 오프셋만큼 떨어진 위치에 첫 번째 섹션이 위치한다.
+    <blockquote>
+      <p>의문점: 이 값은 SectionAlignment의 배수일려나?</p>
+    </blockquote>
+  </li>
+  <li>Subsystem:<br />
+이 값을 보고 시스템 드라이버 파일인지, 일반 실행 파일인지 구분할 수 있다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">값</th>
+      <th style="text-align: left">의미</th>
+      <th style="text-align: left">비고</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">Driver file</td>
+      <td style="text-align: left">시스템 드라이버(ntfs.sys)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">GUI file</td>
+      <td style="text-align: left">창 기반 에플리케이션(notepad.exe)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">CUI file</td>
+      <td style="text-align: left">콘솔 기반 에플리케이션(cmd.exe)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>NumberOfRvaAndSizes:<br />
+  <em>IMAGE_DATA_DIRECTORY</em>구조체의 배열로 표에서 말하는 Directory는 그냥 <strong>어떤 구조체의 배열</strong>이라고 생각하면 편하다. 주요 항목은 밑의 표와 같다.<br />
+특히 IMPORT, EXPORT Directory 구조는 PE 헤더에서 <strong>매우</strong> 중요하다.</li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Index</th>
+      <th style="text-align: left">값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">DataDirectory[0]</td>
+      <td style="text-align: left"><strong>EXPORT directory</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DataDirectory[1]</td>
+      <td style="text-align: left"><strong>IMPORT directory</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DataDirectory[2]</td>
+      <td style="text-align: left">RESOURCE directory</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DataDirectory[9]</td>
+      <td style="text-align: left">TLS directory</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>IMAGE_OPTIONAL_HEADER32</em>구조체 전체를 내 Machine에서 확인해보면,</p>
+
+<p><img src="/asset/IMAGE_OPTIONAL_HEADER.JPG" alt="IOH" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">이름</th>
+      <th style="text-align: left">값</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Magic</strong></td>
+      <td style="text-align: left">0x020B(IMAGE_NT_OPTIONAL_HDR64_MAGIC)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MajorLinkerVersion</td>
+      <td style="text-align: left">0x0E</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MinorLinkerVersion</td>
+      <td style="text-align: left">0x0C</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfCode</td>
+      <td style="text-align: left">0x00018E00</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfInitializedData</td>
+      <td style="text-align: left">0x00025000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfUninitialiezedData</td>
+      <td style="text-align: left">0x0000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>AddressOfEntryPoint</strong></td>
+      <td style="text-align: left">0x00019180</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BaseOfCode</td>
+      <td style="text-align: left">0x00001000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>ImageBase</strong></td>
+      <td style="text-align: left">0x0000000140000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>SectionAlignment</strong></td>
+      <td style="text-align: left">0x00001000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>FileAlignment</strong></td>
+      <td style="text-align: left">0x00000200</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MajorOperatingSystemVersion</td>
+      <td style="text-align: left">0x000A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MinorOperatingSystemVersion</td>
+      <td style="text-align: left">0x0000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MajorImageVersion</td>
+      <td style="text-align: left">0x000A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MinorImageVersion</td>
+      <td style="text-align: left">0x0000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MajorSubsystemVersion</td>
+      <td style="text-align: left">0x000A</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">MinorSubsystemVersion</td>
+      <td style="text-align: left">0x0000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Win32VersionValue</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfImage</td>
+      <td style="text-align: left">0x00041000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfHeaders</td>
+      <td style="text-align: left">0x00000400</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CheckSum</td>
+      <td style="text-align: left">0x0004ACDF</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Subsystem</strong></td>
+      <td style="text-align: left">0x0002</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DllCharacteristics</td>
+      <td style="text-align: left">0xC160</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfStackReserve</td>
+      <td style="text-align: left">0x0000000000080000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfStackCommit</td>
+      <td style="text-align: left">0x0000000000011000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfHeapReserve</td>
+      <td style="text-align: left">0x0000000000100000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfHeapCommit</td>
+      <td style="text-align: left">0x0000000000001000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">LoaderFlags</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NumberOfRvaAndSizes</td>
+      <td style="text-align: left">0x00000010</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>RVA of EXPORT Directory</strong></td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Size of EXPORT Directory</strong></td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>RVA of IMPORT Directory</strong></td>
+      <td style="text-align: left">0x0001F448</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Size of IMPORT Directory</strong></td>
+      <td style="text-align: left">0x00000244</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>RVA of RESOURCE Directory</strong></td>
+      <td style="text-align: left">0x00026000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Size of RESOURCE Directory</strong></td>
+      <td style="text-align: left">0x00019CE0</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of EXCEPTION Directory</td>
+      <td style="text-align: left">0x00025000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of EXCEPTION Directory</td>
+      <td style="text-align: left">0x000008B8</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of SECURITY Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of SECURITY Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of BASERELOC Directory</td>
+      <td style="text-align: left">0x00040000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of BASERELOC Directory</td>
+      <td style="text-align: left">0x00000218</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of DEBUG Directory</td>
+      <td style="text-align: left">0x0001E310</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of DEBUG Directory</td>
+      <td style="text-align: left">0x00000054</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of COPYRIGHT Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of COPYRIGHT Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of GLOBALPTR Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of GLOBALPTR Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>RVA of TLS Directory</strong></td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Size of TLS Directory</strong></td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of LOAD_CONFIG Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of LOAD_CONFIG Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of BOUND_IMPORT Directory</td>
+      <td style="text-align: left">0x0001A550</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of BOUND_IMPORT Directory</td>
+      <td style="text-align: left">0x00000100</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of IAT Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of IAT Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of DELAY_IMPORT Directory</td>
+      <td style="text-align: left">0x0001A650</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of DELAY_IMPORT Directory</td>
+      <td style="text-align: left">0x00000970</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of COM_DESCRIPTOR Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of COM_DESCRIPTOR Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">RVA of Reserved Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Size of Reserved Directory</td>
+      <td style="text-align: left">0x00000000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="1336-섹션-헤더">13.3.6) 섹션 헤더</h2>
+<p><strong>각 섹션의 속성</strong>을 정의한 것을 섹션 헤더라고 부르는데, PE 파일을 섹션으로 나누어서 비슷한 것 끼리 저장하기 때문에 각각의 섹션의 속성을 기술할 섹션 헤더가 필요하다. 섹션의 속성에는 <strong>file/memory에서의 시작 위치, 크기, 엑세스 권한</strong> 등이 필요하다. 즉, code/data/resource 마다 각각의 특성, 접근 권한 등을 다르게 설정할 필요가 있는 것이다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">종류</th>
+      <th style="text-align: left">엑세스 권한</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">code</td>
+      <td style="text-align: left">실행, 읽기 권한</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">data</td>
+      <td style="text-align: left">비실행, 읽기, 쓰기 권한</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">resource</td>
+      <td style="text-align: left">비실행, 읽기 권한</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>IMAGE_SECTION_HEADER<br />
+섹션 헤더는 각 섹션별 <em>IMAGE_SECTION_HEADER</em> 구조체의 배열로 이루어져 있다.<br />
+이 구조체에서 알아야 할 중요 맴버는 밑의 표와 같다.<br />
+VirtualAddress와 PointerToRawData는 SectionAlignment와 FileAlignment에 맞게 결정된다.<br />
+Virtualsize와 SizeOfRawData는 일반적으로 서로 다른 값을 가진다. -&gt; 이 말은 파일에서의 섹션 크기와 메모리에 로딩된 섹션의 크기는 다르다는 이야기다.<br />
+Characteristics는 밑의 코드에서 표시된 값들의 bit OR연산으로 이루어진다.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">항목</th>
+      <th style="text-align: left">의미</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">VirtualSize</td>
+      <td style="text-align: left">메모리에서 섹션이 차지하는 크기</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VirtualAddress</td>
+      <td style="text-align: left">메모리에서 섹션의 시작 주소(RVA 형식)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SizeOfRawData</td>
+      <td style="text-align: left">파일에서 섹션이 차지하는 크기</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">PointerToRawData</td>
+      <td style="text-align: left">파일에서 섹셔의 시작 위치</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Characteristics</td>
+      <td style="text-align: left">섹션의 속성(bit OR)</td>
+    </tr>
+  </tbody>
+</table>
+
+<pre><code class="language-C">#define IMAGE_SCN_CNT_CODE 0x00000020 //Section contains code.
+#define IMAGE_SCN_CNT_INITIALIZED_DATA 0x00000040 // Section contains initialized data.
+#define IMAGE_SCN_CNT_UNINITIALIZED_DATA 0x00000080 // Section contains uninititalized data.
+#define IMAGE_SCN_MEM_EXECUTE 0x20000000 // Section is executable.
+#define IMAGE_SCN_MEM_READ 0x40000000 // Section is readable.
+#define IMAGE_SCN_MEM_WRITE 0x80000000 // Section is writable.
+</code></pre>
+
+<p>내 Machine의 섹션 헤더는 이러하다.</p>
+
+<p><img src="/asset/IMAGE_SECTION_HEADER.JPG" alt="SD" /></p>
+
+<p><a href="https://kdy-study.tistory.com/17">참고자료1</a> : <em>IMAGE_OPTIONAL_HEADER64</em>와 <em>IMAGE_OPTIONAL_HEADER32</em>의 차이를 잘 정리해둬서 내가 참고하기 편했던 사이트다.<br />
+<a href="https://docs.microsoft.com/en-us/windows/desktop/api/winnt/ns-winnt-image_optional_header64">참고자료2</a>: 마이크로소프트에서 직접 작성한 <em>IMAGE_OPTIONAL_HEADER64</em>관한 정보다.</p>
+
+
+  </div><a class="u-url" href="/reversing/2019/06/23/13.2)PE-File-Format3.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Logs of my Life</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Logs of my Life</li><li><a class="u-email" href="mailto:tallbin98@gmail.com">tallbin98@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/pbt98"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">pbt98</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hanyang University ERICA,  Division of Computer Science Studying Reverse Engineering</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

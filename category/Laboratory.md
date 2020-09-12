@@ -2,6 +2,6 @@
 
 layout: category
 
-title: Graduate School
+title: Laboratory
 
 ---
