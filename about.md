@@ -15,6 +15,9 @@ comments: false
 * 2019.11 ~ Undergraduate Researcher at Hanyang University System Security Lab.
 * 2019.11 ~ Hycube academic assistant
 
+### Teaching
+* 2020.09 ~ 2020.12 Engineering English Teaching Assistant
+
 ### Awards
 * 2019.05 HEPC(Hanyang ERICA Programming Contest), Excellence Prize
 * 2019.10 HESH(Hanyang ERICA Software Hackathon) 1st Prize

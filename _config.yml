@@ -17,7 +17,6 @@ title: Logs of my Life
 email: tallbin98@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Hanyang University ERICA,  Division of Computer Science
-  Studying Reverse Engineering
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://pbt98.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
