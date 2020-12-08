@@ -20,4 +20,5 @@ comments: false
 
 ### Awards
 * 2019.05 HEPC(Hanyang ERICA Programming Contest), Excellence Prize
-* 2019.10 HESH(Hanyang ERICA Software Hackathon) 1st Prize
+* 2019.10 HESH(Hanyang ERICA Software Hackathon), 1st Prize
+* 2020.12 Hanyang ERICA SW/ICT Academic Conference, Excellence Prize
