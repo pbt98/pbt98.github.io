@@ -8,8 +8,8 @@ comments: false
 ### Education
 * 2011.03 ~ 2014.02 Banwol Middle School  
 * 2014.03 ~ 2017.02 Hamhyun High School  
-* 2018.03 ~ 2022.02 Hanyang University ERICA, Division of Computer Science
-* 2022.03 ~ Hanyang University, Department of Computer Science & Engineering 
+* 2018.03 ~ 2022.02 B.S. Hanyang University ERICA, Division of Computer Science
+* 2022.03 ~ M.S. to Ph.D. Hanyang University, Department of Computer Science & Engineering 
 
 ### Profile
 * 2018.12 ~ 2019.11 Hycube Vice-president
