@@ -9,28 +9,28 @@ comments: true
 # 개요
 4대 보안 학회 중 하나인 IEEE Security & Privacy 2021에 개재된 논문들을 정리하는 포스트이다. 철저히 내 흥미와 주관에 따라 몇 개를 선정하여 읽고 정리하였으며, 개재된 논문 목록은 [이곳](https://www.ieee-security.org/TC/SP2021/program-papers.html)에서 확인할 수 있다.
 
-# A First Look at Zoombombing
+# 1. [A First Look at Zoombombing](https://arxiv.org/abs/2009.03822)
 
-# ARBITRAR : User-Guided API Misuse Detection
+# 2. ARBITRAR : User-Guided API Misuse Detection
 
-# Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding
+# 3. Adversarial Watermarking Transformer: Towards Tracing Text Provenance with Data Hiding
 
-# Adversary Instantiation: Lower bounds for differentially private machine learning
+# 4. Adversary Instantiation: Lower bounds for differentially private machine learning
 
-# Android Custom Permissions Demystified: From Privilege Escalation to Design Shortcomings
+# 5. Android Custom Permissions Demystified: From Privilege Escalation to Design Shortcomings
 
-# Black Widow: Blackbox Data-driven Web Scanning
+# 6. Black Widow: Blackbox Data-driven Web Scanning
 
-# Bookworm Game: Automatic Discovery of LTE Vulnerabilities Through Documentation Analysis
+# 7. Bookworm Game: Automatic Discovery of LTE Vulnerabilities Through Documentation Analysis
 
-# Breaking the Specification: PDF Certification
+# 8. Breaking the Specification: PDF Certification
 
-# CANnon: Reliable and Stealthy Remote Shutdown Attacks via Unaltered Automotive Microcontrollers
+# 9. CANnon: Reliable and Stealthy Remote Shutdown Attacks via Unaltered Automotive Microcontrollers
 
-# Compositional Security for Reentrant Applications
+# 10. Compositional Security for Reentrant Applications
 
-# ConDySTA: Context-Aware Dynamic Supplement to Static Taint Analysis 
+# 11. ConDySTA: Context-Aware Dynamic Supplement to Static Taint Analysis 
 
-# CrawlPhish: Large-scale Analysis of Client-side Cloaking Techniques in Phishing
+# 12. CrawlPhish: Large-scale Analysis of Client-side Cloaking Techniques in Phishing
 
-# Cross Layer Attacks and How to Use Them (for DNS Cache Poisoning, Device Tracking and More) 
+# 13. Cross Layer Attacks and How to Use Them (for DNS Cache Poisoning, Device Tracking and More) 
