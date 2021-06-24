@@ -14,3 +14,4 @@ comments: true
 
 # 해결해야할 점
 1. Replay Attack을 방지하기 위해서 Watermark를 삽입하는 것이지만, Voice synthesize Attack에는 취약할 수 있다. -> Watermark와 사용자 명령 음성이 얼마나 분리되기 어렵게 만들 수 있는가?
+2. Signal Processing 기반 공격에는 취약할 수 있다.
