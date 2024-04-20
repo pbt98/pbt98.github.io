@@ -33,7 +33,7 @@
       "highlights": ["Privacy", "Usable Security", "Cybercrime"]
     }
   ],
-  // "volunteer": [
+  "volunteer": [
     // {
       // "organization": "People's Climate March",
       // "location": "Zurich, Switzerland",
@@ -44,7 +44,7 @@
       // "summary": "Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.",
       // "highlights": ["Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march.", "Men of the year 2014 by Time magazine"]
     // }
-  // ],
+  ],
   "education": [
     {
       "institution": "Hanyang University, Ansan",
@@ -99,7 +99,7 @@
       "summary": "Maven League"
     }
   ],
-  // "certificates": [
+  "certificates": [
   //   {
   //     "name": "Machine Learning",
   //     "date": "2018-01-01",
@@ -142,7 +142,7 @@
   //     "url": "https://example.com",
   //     "icon": "fa-solid fa-clipboard-check"
   //   }
-  // ],
+  ],
   "publications": [
     {
       "name": "STATION: Gesture-Based Authentication for Voice Interfaces",
@@ -152,7 +152,7 @@
       "summary": "The popularity of smart home devices has led to an increase in security incidents happening in smart homes. A key measure to avoid such incidents is to authenticate users before they can interact with smart devices. However, current methods often require additional hardware. This paper proposes, a gesture-based authentication system, an effective gesture-based authentication method built on top of the voice interfaces already available in these smart home devices, without adding new hardware. uses a gesture processing pipeline that identifies Doppler-existing frames and detects the Direction of Arrival of Reflection to authenticate users in low SNR environments and at longer distances. Furthermore, regarding the nature of gesture-based authentication, this system also supports detecting user liveness, preventing replay and synthesis attacks from remote attackers. The evaluation of shows high accuracy with a False Accept Rate (FAR) of 0.08% and False Reject Rate (FRR) of 3.10% for users within 1.5m of the device."
     },
   ],
-  // "skills": [
+  "skills": [
   //   {
   //     "name": "",
   //     "level": "Master",
@@ -166,7 +166,7 @@
   //       "Quantum Teleportation"
   //     ]
   //   }
-  // ],
+  ],
   "languages": [
     {
       "language": "Korean",
@@ -179,7 +179,7 @@
       "icon": ""
     }
   ],
-  // "interests": [
+  "interests": [
   //   {
   //     "name": "Physics",
   //     "icon": "fa-solid fa-tag",
@@ -192,8 +192,8 @@
   //       "Quantum Teleportation"
   //     ]
   //   }
-  // ],
-  // "references": [
+  ],
+  "references": [
   //   {
   //     "name": "Professor John Doe",
   //     "icon": "fa-solid fa-laptop",
@@ -204,7 +204,7 @@
   //     "icon": "fa-solid fa-thumbtack",
   //     "reference": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit. D"
   //   }
-  // ],
+  ],
   "projects": [
     {
       "name": "지능형 서비스 로봇의 사이버 레질리언스 확보를 위한 보안기술 개발",
