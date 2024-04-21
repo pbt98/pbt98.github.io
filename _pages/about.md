@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Department of Computer Science and Engineering, Hanyang University, Ansan</a>. pbt98@hanyang.ac.kr
+subtitle: <a href='http://cse.hanyang.ac.kr/'>Department of Computer Science and Engineering, Hanyang University, Ansan</a>. pbt98@hanyang.ac.kr
 
 profile:
   align: right
