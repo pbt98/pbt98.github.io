@@ -19,8 +19,8 @@ social: true # includes social icons at the bottom of the page
 
 Welcome! 
 
-I'm **Sungbin Park** who received my B.S. of Computer Science at Hanyang University, Ansan, and I am currently pursuing my Ph.D. in [AI and Cybersecurity Laboratory]{https://ace.hanyang.ac.kr} (advisor: [Yeonjoon Lee]{https://yeonjoonlee.com}) at same university.
+I'm **Sungbin Park** who received my B.S. of Computer Science at Hanyang University, Ansan, and I'm currently pursuing my Ph.D. in [AI and Cybersecurity Laboratory](https://ace.hanyang.ac.kr) (advisor: [Yeonjoon Lee](https://yeonjoonlee.com)) at same university.
 
-As a cybersecurity researcher, I am interested in privacy, usable security, and cybercrime.
+As a cybersecurity researcher, I'm interested in privacy, usable security, and cybercrime.
 
-In my spare time, I enjoy doing sports (mostly badminton, tennis, and cycling), and playing instruments, such as guitar and piano.
+In my spare time, I enjoy doing sports (mostly badminton, tennis, and cycling), watching Formula 1 (huge fan of Mercedes), and playing instruments, such as guitar and piano.
