@@ -101,46 +101,11 @@
   ],
   "certificates": [
     {
-      "name": "Machine Learning",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-location-dot"
-    },
-    {
-      "name": "Quantum Computing",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
+      "name": "TEPS-399/600",
+      "date": "2021-08-01",
+      "issuer": "Seoul National University",
+      "url": "",
       "icon": "fa-solid fa-tag"
-    },
-    {
-      "name": "Quantum Information",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-envelope"
-    },
-    {
-      "name": "Quantum Cryptography",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-hashtag"
-    },
-    {
-      "name": "Quantum Communication",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-calendar"
-    },
-    {
-      "name": "Quantum Teleportation",
-      "date": "2018-01-01",
-      "issuer": "Stanford University",
-      "url": "https://example.com",
-      "icon": "fa-solid fa-clipboard-check"
     }
   ],
   "publications": [
@@ -175,21 +140,25 @@
     },
     {
       "language": "English",
-      "fluency": "Intermediate",
+      "fluency": "Limited Working Proficiency",
+      "icon": ""
+    },
+    {
+      "language": "Spanish",
+      "fluency": "Novice",
       "icon": ""
     }
   ],
   "interests": [
     {
-      "name": "Physics",
+      "name": "Cyber Security",
       "icon": "fa-solid fa-tag",
       "keywords": [
-        "Quantum Mechanics",
-        "Quantum Computing",
-        "Quantum Information",
-        "Quantum Cryptography",
-        "Quantum Communication",
-        "Quantum Teleportation"
+        "Privacy",
+        "Usable Security",
+        "Cybercrime",
+        "IoT Security",
+        "System Security"
       ]
     }
   ],
@@ -208,18 +177,34 @@
   "projects": [
     {
       "name": "지능형 서비스 로봇의 사이버 레질리언스 확보를 위한 보안기술 개발",
-      "summary": "수집된 데이터보안 및 개인정보보호 기술 개발",
+      "summary": "정보통신기획평가원 정보보호핵심원천기술개발사업, 수집된 데이터보안 및 개인정보보호기술 개발",
       "highlights": ["Data de-identification", "Differential Privacy"],
       "startDate": "2024-04-01",
       "endDate": "Now",
       "url": ""
     },
     {
+      "name": "국방 무인이동체 역이용 방지 제어권 보호기술 개발 ",
+      "summary": "한국전자통신연구원, 드론 하드웨어 특성 기반 인증 기법 개발",
+      "highlights": ["Hardware Characteristics", "Authentication"],
+      "startDate": "2023-06-01",
+      "endDate": "Now",
+      "url": ""
+    },
+    {
       "name": "음성 제어 플랫폼 보안성 강화를 위한 연구",
-      "summary": "음성 제어 플랫폼 기기를 위한 인증 기법 및 플랫폼 소프트웨어 분석",
+      "summary": "(재)한국연구재단, 음성 제어 플랫폼 기기를 위한 인증 기법 및 플랫폼 소프트웨어 분석",
       "highlights": ["Voice Interface", "Authentication"],
       "startDate": "2022-06-01",
       "endDate": "2024-02-29",
+      "url": ""
+    },
+    {
+      "name": "스마트기기 서비스 기반 데이터 획득 기술 연구",
+      "summary": "ETRI부설국가보안기술연구소, 스마트 기기 백업 서비스 및 음성 비서 취약점 분석",
+      "highlights": ["Vulnerability Analysis", "UI Analysis", "Reverse Engineering"],
+      "startDate": "2020-04-01",
+      "endDate": "2020-10-31",
       "url": ""
     }
   ]
