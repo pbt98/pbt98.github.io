@@ -176,9 +176,25 @@
   ],
   "projects": [
     {
+      "name": "지능형 IoT 보안: 언어 모델을 활용한 차세대 사이버 방어 메커니즘 및 취약점 연구",
+      "summary": "정보통신기획평가원, 이벤트 로그 분석을 통한 IoT 플랫폼 내 개인정보 처리 과정의 투명화 및 데이터 전송 최소화",
+      "highlights": ["Data Privacy", "Large Language Model"],
+      "startDate": "2024-04-01",
+      "endDate": "Now",
+      "url": ""
+    },
+    {
+      "name": "거대 언어 모델 기반 안드로이드 취약점 탐지 및 자동 수리",
+      "summary": "(재)한국연구재단, 거대 언어 모델 기반 안드로이드 프로그램 취약점 탐지 및 자동 수리 기술 개발",
+      "highlights": ["Automated Program Repair", "Large Language Model"],
+      "startDate": "2024-04-01",
+      "endDate": "Now",
+      "url": ""
+    },
+    {
       "name": "지능형 서비스 로봇의 사이버 레질리언스 확보를 위한 보안기술 개발",
       "summary": "정보통신기획평가원, 수집된 데이터보안 및 개인정보보호기술 개발",
-      "highlights": ["Data de-identification", "Differential Privacy"],
+      "highlights": ["Data De-identification", "Differential Privacy"],
       "startDate": "2024-04-01",
       "endDate": "Now",
       "url": ""
