@@ -114,7 +114,7 @@
       "publisher": "IEEE Internet of Things Journal",
       "releaseDate": "2024-03-28",
       "url": "https://doi.org/10.1109/JIOT.2024.3382721",
-      "summary": "The popularity of smart home devices has led to an increase in security incidents happening in smart homes. A key measure to avoid such incidents is to authenticate users before they can interact with smart devices. However, current methods often require additional hardware. This paper proposes, a gesture-based authentication system, an effective gesture-based authentication method built on top of the voice interfaces already available in these smart home devices, without adding new hardware. uses a gesture processing pipeline that identifies Doppler-existing frames and detects the Direction of Arrival of Reflection to authenticate users in low SNR environments and at longer distances. Furthermore, regarding the nature of gesture-based authentication, this system also supports detecting user liveness, preventing replay and synthesis attacks from remote attackers. The evaluation of shows high accuracy with a False Accept Rate (FAR) of 0.08% and False Reject Rate (FRR) of 3.10% for users within 1.5m of the device."
+      "summary": ""
     }
   ],
   "skills": [
