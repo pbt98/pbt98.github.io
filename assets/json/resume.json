@@ -55,7 +55,7 @@
       "startDate": "2022-03-02",
       "endDate": "Now",
       "score": "10",
-      "courses": ["Privacy", "Usable Security", "Cybercrime"]
+      "courses": ["AI Security", "Differential Privacy", "Usable Security"]
     },
     {
       "institution": "Hanyang University, Ansan",
@@ -109,6 +109,13 @@
     }
   ],
   "publications": [
+    {
+      "name": "Demystifying the DP-friendliness of Vision Transformers: Impact of Inductive Biases and Efficiency Mechanisms",
+      "publisher": "Network and Distributed System Security (NDSS) Symposium",
+      "releaseDate": "2027-03-28",
+      "url": "",
+      "summary": ""
+    },
     {
       "name": "STATION: Gesture-Based Authentication for Voice Interfaces",
       "publisher": "IEEE Internet of Things Journal",

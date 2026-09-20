@@ -21,6 +21,6 @@ Welcome!
 
 I'm **Sungbin Park** who received my B.S. in Computer Science at Hanyang University, Ansan, and I'm currently pursuing my Ph.D. in Cybersecurity in [AI and Cybersecurity Laboratory](https://ace.hanyang.ac.kr) (advisor: [Yeonjoon Lee](https://yeonjoonlee.com)) at same university.
 
-As a cybersecurity researcher, I am interested in privacy, usable security, and cybercrime. Currently, I am focusing on protecting user privacy from IoT platforms and from surveillance video through de-identification.
+As a cybersecurity researcher, I am interested in AI Security, Differential Privacy, and Usable Security. Currently, I am focusing on analyzing the impact of applying machine unlearning mechanisms to a deep learning model with DP.
 
 In my spare time, I enjoy playing sports (mostly badminton, tennis, and cycling), watching Formula 1 (huge fan of Mercedes), and playing instruments, such as guitar and piano.
