@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-"What to Perturb, How to Propagate: A Graph-Guided Transferable Attack on VLP Models" has been accepted to Neural Information Processing Systems (NeurIPS) 2026 (Top-tier AI Conference)!
+"What to Perturb, How to Propagate: A Graph-Guided Transferable Attack on VLP Models" (co-first-author) has been accepted to Neural Information Processing Systems (NeurIPS) 2026 (Top-tier AI Conference)!
